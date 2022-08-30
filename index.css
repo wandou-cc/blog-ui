@@ -91,7 +91,7 @@ a:active {
 }
 
 .blog-ui-csdn-main {
-    display: flex;
+    display: flex !important;
     flex-wrap: wrap;
     justify-content: space-between;
 }
@@ -99,4 +99,9 @@ a:active {
 .setting-item {
     width: calc(50% - 20px);
     margin: 5px;
+}
+
+svg {
+    width: 40px !important;
+    height: 40px !important;
 }
