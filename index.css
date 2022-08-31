@@ -36,7 +36,7 @@ a:active {
     padding: 10px;
     font-size: 12px;
     color: #4f4f4f;
-    z-index: 9999;
+    z-index: 99;
     /* color: #ccc; */
 }
 
@@ -105,7 +105,7 @@ a:active {
 svg {
     width: 20px !important;
     height: 20px !important;
-    z-index: 100
+    z-index: 100;
 }
 
 .dis-none {
