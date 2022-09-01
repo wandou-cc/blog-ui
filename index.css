@@ -113,7 +113,8 @@ svg {
 }
 
 @media screen and (min-width: 0px) {
-    .nodata .recommend-right {
+    .nodata .recommend-right ,.nodata #asideCategory, .nodata .isShowFooterAds {
         display: block !important;
     }
 }
+
