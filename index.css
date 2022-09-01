@@ -9,7 +9,7 @@ a:active {
 #blog-ui-main {
     position: fixed;
     left: 0;
-    top: 50px;
+    top: 100px;
     cursor: pointer;
     box-shadow: 0 0 10px #ccc;
     border-radius: 5px;
@@ -103,11 +103,17 @@ a:active {
 }
 
 svg {
-    width: 20px !important;
-    height: 20px !important;
+    width: 30px !important;
+    height: 30px !important;
     z-index: 100;
 }
 
 .dis-none {
     display: none !important;
+}
+
+@media screen and (min-width: 0px) {
+    .nodata .recommend-right {
+        display: block !important;
+    }
 }
