@@ -118,3 +118,8 @@ svg {
     }
 }
 
+@media screen and (min-width: 0px) {
+    .nodata #asidedirectory, .nodata #asideCategory, .nodata .isShowFooterAds {
+        display: inline;
+    }
+}
