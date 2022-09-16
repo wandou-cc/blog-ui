@@ -6,44 +6,86 @@ a:active {
     text-decoration: none;
 }
 
-#blog-ui-main {
+#blogUiApp {
     position: fixed;
-    left: 0;
+    left: 5px;
     top: 100px;
+    width: 300px;
+    height: 350px;
+    z-index: 99;
+}
+
+.position {
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+#blog-ui-main {
+    position: absolute;
     cursor: pointer;
     box-shadow: 0 0 10px #ccc;
     border-radius: 5px;
-    z-index: 100;
     background-color: #fff;
+    width: 28px !important;
+    height: 28px !important;
+    z-index: 999 !important;
+    /* opacity: 0.5; */
+    animation: svgAnimation 15s infinite;
 }
 
 #blog-ui-main:hover {
     border-radius: 0px;
     box-shadow: 0 0 10px #fff;
     transition: all 0.5s;
+    opacity: 1;
+}
+
+@keyframes svgAnimation {
+    0% {
+        transform: translate(0)
+    }
+  
+    30% {
+        transform: translateY(-5px)
+    }
+  
+    50% {
+        transform: translateY(0px)
+    }
+  
+    70% {
+        transform: translateY(-5px)
+    }
+  
+    to {
+        transform: translate(0)
+    }
 }
 
 #blog-main {
-    position: fixed;
-    left: 0;
-    top: 40px;
-    display: none;
-    width: 300px;
-    height: 400px;
+    position: absolute;
+    height: 100%;
+    top: -10px;
+    left: -3px;
+    z-index:99;
+    /* display: none; */
     border-radius: 5px;
     box-shadow: 0 0 10px #ccc;
     background-color: #fff;
     padding: 10px;
     font-size: 12px;
     color: #4f4f4f;
-    z-index: 99;
-    /* color: #ccc; */
 }
 
 .blog-main-title {
     text-align: center;
     font-size: 18px;
-    margin: 10px;
+    margin: 8px;
+}
+
+.blog-main-title a {
+    font-weight: 700;
 }
 
 .blog-ui-foot {
@@ -86,9 +128,16 @@ a:active {
 }
 
 .blog-ui-item-title {
-    font-size: 14px;
-    font-weight: 800;
+    font-size: 16px;
     margin: 10px 0px;
+}
+
+
+.blog-ui-csdn {
+    max-height: 190px;
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap
 }
 
 .blog-ui-csdn-main {
@@ -98,20 +147,21 @@ a:active {
 }
 
 .setting-item {
+    display: flex;
+    align-items: center;
     width: calc(50% - 20px);
     margin: 5px;
 }
 
-svg {
-    width: 30px !important;
-    height: 30px !important;
-    z-index: 100;
+.form-check-label {
+    margin-left: 10px;
 }
+
 
 .dis-none {
     display: none !important;
 }
-
+/* 
 @media screen and (min-width: 0px) {
     .nodata .recommend-right {
         display: block !important;
@@ -119,7 +169,51 @@ svg {
 }
 
 @media screen and (min-width: 0px) {
-    .nodata #asidedirectory, .nodata #asideCategory, .nodata .isShowFooterAds {
+
+    .nodata #asidedirectory,
+    .nodata #asideCategory,
+    .nodata .isShowFooterAds {
         display: inline;
     }
+} */
+
+
+.dialog-dom {
+    position: fixed;
+    top: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: green;
+    background-color: rgb(179, 232, 238);
+    border-radius: 5px;
+    z-index: 999;
+    padding: 5px 15px;
+    opacity: 0;
+}
+
+pre {
+    -webkit-touch-callout: inherit !important;
+    -webkit-user-select: inherit !important;
+    -khtml-user-select: inherit !important;
+    -moz-user-select: inherit !important;
+    -ms-user-select: inherit !important;
+    user-select: inherit !important;
+}
+
+code {
+    -webkit-touch-callout: inherit !important;
+    -webkit-user-select: inherit !important;
+    -khtml-user-select: inherit !important;
+    -moz-user-select: inherit !important;
+    -ms-user-select: inherit !important;
+    user-select: inherit !important;
+}
+
+.csdn-side-toolbar  {
+    left:inherit !important;
+    /* left: inherit; */
+}
+
+.passport-login-container {
+    display: none;
 }
