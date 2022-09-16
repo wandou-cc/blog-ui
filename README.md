@@ -1,7 +1,7 @@
 
  <p align=center>
     <a title="Hits" target="_blank" href="https://github.com/wandou-cc/exclusive-translation">
-     <img src="./logo.png"/>
+     <img src="./05522BDE-5715-43B7-A04C-8931945A59C7.png"/>
   </a>
   <br>
   <a title="Hits" target="_blank" href="https://github.com/wandou-cc/exclusive-translation">
