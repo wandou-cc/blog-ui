@@ -1,8 +1,8 @@
 
  <p align=center>
     <a title="Hits" target="_blank" href="https://github.com/wandou-cc/blog-ui">
-     <img src="./05522BDE-5715-43B7-A04C-8931945A59C7.png"/>
-  </a>
+     <img src="./icon/icon.png"/>
+    </a>
   <br>
   <a title="Hits" target="_blank" href="https://github.com/wandou-cc/blog-ui">
     <img src="https://hits.b3log.org/wandou-cc/blog-ui.svg">
