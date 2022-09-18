@@ -1,7 +1,7 @@
 
- <p align=center>
+ <center>
     <a title="Hits" target="_blank" href="https://github.com/wandou-cc/blog-ui">
-     <img src="./icon/icon.png"/>
+     <img src="https://cdn.jsdelivr.net/gh/wandou-cc/blog-ui@20220918_V1/icon/icon.png"/>
     </a>
   <br>
   <a title="Hits" target="_blank" href="https://github.com/wandou-cc/blog-ui">
@@ -29,7 +29,7 @@
   <a title="Hits" target="_blank" href="https://github.com/wandou-cc/blog-ui">
     <img src="https://img.shields.io/github/watchers/wandou-cc/blog-ui?style=flat-square"/>
   </a>
-</p>
+</center>
 
 ## 设计初衷
 作为一个CV工程师，面向CSDN 百度编程的程序员，每天都会用到CSDN 博客园 这种博客平台 又有个种限制 花里胡哨的UI页面 各种广告弹窗 还是比较烦人的 于是抽空搞了个插件。
@@ -38,8 +38,15 @@
 
  祝各位使用愉快吧🌟🌟
 ## 版本更新
+
+### 1.0.2
+  兼容火狐的问题
+### 1.0.1
+  处理CSDN不同浏览器bug
+
 ### 1.0.0
   基础版本 主要对 CSDN 文章详情页面进行优化 主要对 顶部 左侧 右侧 底部的ui展示 均可自定义配置展示
+
 |序号      | 功能 |
 | ----------- | ----------- |
 | 1      | 动态配置右侧显示 自定义配置显示模块    |
@@ -64,12 +71,9 @@
 
 当然啦在移动端还是PC端是不一样的
 
-<img src="./icon/use.jpg"/>
+<img src="https://cdn.jsdelivr.net/gh/wandou-cc/blog-ui@20220918_V1/icon/use.jpg"/>
 
 ## 常见问题
 前端的同学可能一看就明白其实就是修改了样式 调整了布局 所以就涉及到元素选择 所以官方改了功能自然就会有问题 
 
 对于功能的失效联系作者 会及时更改修复 问题不大
-
-## 吐槽
-而且我发现同一篇文章chrome上就不会有广告 firefox 就会有广告 迷惑🥱

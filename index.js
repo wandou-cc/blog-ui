@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         ⚡️ 最新CSDN优化插件 独家UI排版 更方便您的阅读📖 去广告🪧 免登录复制 一键复制 劫持剪贴板 持续更新
 // @namespace    https://github.com/wandou-cc/blog-ui
-// @version      1.0.1
+// @version      1.0.2
 // @description  ⚡️ 最新CSDN优化插件｜💫全新布局｜🫥去掉一些花里胡哨的组件，阅读更加清晰｜🐯基本实现显示部分由用户自己定制｜🌈直接一键复制 不在需要登录｜✨展开所有折叠代码，简化操作｜支持移动端PC端通通优化｜💻这里也只是第一版本，后续计划将进行CSDN 文章列表页优化 博客园 掘金 等UI 布局的更改 以及CSDN 一些付费资源对处理
 // @author       chenchao
 // @include      *://blog.csdn.net/*/article/details/*
@@ -23,7 +23,7 @@
 
 GM_addStyle(GM_getResourceText("css"));
 
-    const VERSION = '1.0.1'
+    const VERSION = '1.0.2'
     const TITLE = 'BLOGUI'
 
     const CSDNCONFIG = {
@@ -439,27 +439,27 @@ GM_addStyle(GM_getResourceText("css"));
 
     // 处理顶部
     function removeTopbar(checked) {
+        setTimeout(()=>{
+            // 处理左侧
+            getElement('.toolbar-menus li').forEach(item => {
+                let dataType = item.getAttribute('title')
+                if (['高价值源码课程分享', '简单高效优惠的云服务', '程序员的如意兵器'].includes(dataType)) {
+                    item.style.display = checked ? 'inline-block' : 'none'
+                }
+            })
 
-        // 处理左侧
-        getElement('.toolbar-menus li').forEach(item => {
-            let dataType = item.getAttribute('title')
-            if (['高价值源码课程分享', '简单高效优惠的云服务', '程序员的如意兵器'].includes(dataType)) {
-                item.style.display = checked ? 'inline-block' : 'none'
+            // 判断是否登录
+            let loginDom = getElement('.toolbar-btn-loginfun')
+            // 已经登录
+            if (!loginDom) {
+                return
             }
-        })
 
-        // 判断是否登录
-        let loginDom = getElement('.toolbar-btn-loginfun')
-        // 已经登录
-        if (!loginDom) {
-            return
-        }
-
-        // 删除顶部右侧
-        ['.toolbar-btn-vip', '.toolbar-btn-collect', '.toolbar-dynamic-box', '.toolbar-mp-menubox', '.toolbar-btn-write'].forEach(item => {
-            displayDom(item, checked)
-        })
-
+            // 删除顶部右侧
+            ['.toolbar-btn-vip', '.toolbar-btn-collect', '.toolbar-dynamic-box', '.toolbar-mp-menubox', '.toolbar-btn-write'].forEach(item => {
+                displayDom(item, checked)
+            })
+        },500)
     }
 
     // operate
