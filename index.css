@@ -295,3 +295,7 @@ code {
     height:35px;
     margin: 10px;
 }
+
+.box-shadow {
+    display: none;
+}
