@@ -1,5 +1,5 @@
 
- <center>
+ <p style='text-align:center'>
     <a title="Hits" target="_blank" href="https://github.com/wandou-cc/blog-ui">
      <img src="https://cdn.jsdelivr.net/gh/wandou-cc/blog-ui@20220918_V1/icon/icon.png"/>
     </a>
@@ -29,7 +29,7 @@
   <a title="Hits" target="_blank" href="https://github.com/wandou-cc/blog-ui">
     <img src="https://img.shields.io/github/watchers/wandou-cc/blog-ui?style=flat-square"/>
   </a>
-</center>
+</p>
 
 ## 设计初衷
 作为一个CV工程师，面向CSDN 百度编程的程序员，每天都会用到CSDN 博客园 这种博客平台 又有个种限制 花里胡哨的UI页面 各种广告弹窗 还是比较烦人的 于是抽空搞了个插件。
