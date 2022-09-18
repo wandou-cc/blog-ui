@@ -1,5 +1,5 @@
 
- <p style='text-align:center'>
+ <p align='center'>
     <a title="Hits" target="_blank" href="https://github.com/wandou-cc/blog-ui">
      <img src="https://cdn.jsdelivr.net/gh/wandou-cc/blog-ui@20220918_V1/icon/icon.png"/>
     </a>
