@@ -9,7 +9,7 @@ a:active {
 #blogUiApp {
     position: fixed;
     left: 5px;
-    top: 100px;
+    top: 150px;
     z-index: 1001;
 }
 
@@ -21,6 +21,8 @@ a:active {
 
 #blog-ui-main {
     position: absolute;
+    left: 5px;
+    top: 5px;
     cursor: pointer;
     box-shadow: 0 0 10px #ccc;
     border-radius: 5px;
@@ -138,14 +140,6 @@ a:active {
     margin: 10px 0px;
 }
 
-
-/* .blog-ui-csdn {
-    max-height: 190px;
-    position: relative;
-    overflow: hidden;
-    white-space: nowrap
-} */
-
 .blog-ui-csdn-main {
     margin-top: 20px;
     display: flex !important;
@@ -165,24 +159,6 @@ a:active {
 }
 
 
-.dis-none {
-    display: none !important;
-}
-/* 
-@media screen and (min-width: 0px) {
-    .nodata .recommend-right {
-        display: block !important;
-    }
-}
-
-@media screen and (min-width: 0px) {
-
-    .nodata #asidedirectory,
-    .nodata #asideCategory,
-    .nodata .isShowFooterAds {
-        display: inline;
-    }
-} */
 
 
 .dialog-dom {
@@ -221,9 +197,6 @@ code {
     /* left: inherit; */
 }
 
-.passport-login-container {
-    display: none;
-}
 
 .bottom-tip {
     width: 100%;
@@ -296,6 +269,19 @@ code {
     margin: 10px;
 }
 
-.box-shadow {
-    display: none;
+.blog-top-banner, 
+.blog-slide-ad-box, 
+.box-shadow, 
+#kp_box_www_swiper_ban, 
+.blog-banner,
+.passport-login-container,
+.weixin-shadowbox,
+.feed-Sign-span,
+.feed-Sign-span .feed-Sign-style-old .open_app_channelCode,
+.btn_open_app_prompt_div,
+.passport-login-container,
+.dis-none
+{
+    display: none !important;
 }
+
