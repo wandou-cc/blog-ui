@@ -282,6 +282,6 @@ code {
 .passport-login-container,
 .dis-none
 {
-    display: none !important;
+    display: none;
 }
 

@@ -11,25 +11,24 @@
     let CURRENTPAGES = null
 
     const CSDNCONFIG = {
-
         2: {
             pc: {
                 webBlogTitle: "CSDN设置(pc)",
                 children: [
                     // 左侧
-                    { domId: "#asideProfile", for: "CsdnAuthorInfo", label: "作者信息", checked: true, type: 'aside' },
-                    { domId: "#asidedirectory", for: "CsdnDirectory", label: "目录", checked: true, type: 'aside' },
-                    { domId: "#asideSearchArticle", for: "CsdnSerch", label: "搜索博主文章", checked: false, type: 'aside' },
-                    { domId: "#asideRank", for: "CsdnAsideRank", label: "是否入选", checked: false, type: 'aside' },
-                    { domId: "#asideHotArticle", for: "CsdnHotPage", label: "热门文章", checked: false, type: 'aside' },
-                    { domId: "#asideCategory", for: "CsdnCategory", label: "分类专栏", checked: false, type: 'aside' },
-                    { domId: "#asideNewComments", for: "CsdnComments", label: "最新评论", checked: false, type: 'aside' },
-                    { domId: "#asideNewNps", for: "CsdnNewNps", label: "推荐博客", checked: false, type: 'aside' },
-                    { domId: "#asideArchive", for: "CsdnArchive", label: "最新文章", checked: false, type: 'aside' },
+                    { domId: "#asideProfile", for: "CsdnAuthorInfo", label: "作者信息", checked: true },
+                    { domId: "#asidedirectory", for: "CsdnDirectory", label: "目录", checked: true },
+                    { domId: "#asideSearchArticle", for: "CsdnSerch", label: "搜索博主文章", checked: false },
+                    { domId: "#asideRank", for: "CsdnAsideRank", label: "是否入选", checked: false },
+                    { domId: "#asideHotArticle", for: "CsdnHotPage", label: "热门文章", checked: false },
+                    { domId: "#asideCategory", for: "CsdnCategory", label: "分类专栏", checked: false },
+                    { domId: "#asideNewComments", for: "CsdnComments", label: "最新评论", checked: false },
+                    { domId: "#asideNewNps", for: "CsdnNewNps", label: "推荐博客", checked: false },
+                    { domId: "#asideArchive", for: "CsdnArchive", label: "最新文章", checked: false },
 
                     // /  底部相关推荐
-                    { domId: ".recommend-box", for: "CsdnRecommend", label: "底部相关推荐", checked: false, type: 'foot' },
-                    { domId: "#pcCommentBox", for: "CsdnpcCommentBox", label: "评论", checked: true, type: 'foot' },
+                    { domId: ".recommend-box", for: "CsdnRecommend", label: "底部相关推荐", checked: false },
+                    { domId: "#pcCommentBox", for: "CsdnpcCommentBox", label: "评论", checked: true },
                     { domId: "#blogExtensionBox", for: "CsdnblogExtensionBox", label: "引流信息", checked: false },
                     { domId: "#treeSkill", for: "CsdntreeSkill", label: "知识档案匹配", checked: false },
 
@@ -69,8 +68,7 @@
                     { domId: ".main-rt .wrap-hot", for: "Csdnwrap-hot", label: "猜你想搜", checked: false },
                     { domId: ".main-rt .so-items-taglist", for: "Csdntaglist", label: "相关标签", checked: false },
                     { domId: "", for: "Csdn4top", label: "顶部导航信息", checked: false, getEvent: removeTopbar },
-                    { domId: "", for: "CsdnSoNav", label: "平铺显示(请勿与其他同用)", getEvent: soPc },
-
+                    { domId: "", for: "CsdnSoNav", label: "平铺显示(请勿与其他同用)", getEvent: soPc }
                 ]
             }
         },
@@ -83,7 +81,6 @@
     function initUrl() {
         let url = window.location.href
         let urlResList = [
-            { platform: 'CSDN', reg: /.*so.csdn.net.*\/details\/.*/, title: 'CSDN搜索页', key: 1 },
             { platform: 'CSDN', reg: /.*blog.csdn.net.*\/details\/.*/, title: 'CSDN详情优化', key: 2 },
             { platform: 'CSDN', reg: /.*blog.csdn.net\/nav.*/, title: 'CSDN文章列表优化', key: 3 },
             { platform: 'CSDN', reg: /.*so.csdn.net\/.*/, title: 'CSDN搜索页面', key: 4 },
@@ -231,7 +228,6 @@
                     </div>
                 </div>
             `
-        //   // <div class="blog-ui-introduction"> 拒绝花里胡哨的操作, 还一个干净的页面给你！ </div>
         let app = document.createElement('div')
         app.setAttribute('id', 'blogUiApp')
         document.querySelectorAll('body')[0].appendChild(app)
@@ -382,7 +378,12 @@
                 </p>
                 <p class='blog-ui-version'> 当前版本号: ${VERSION}</p>
                 <a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=RYQVnUPuE_KUnJqOztGM40OWHmiVd74g&jump_from=webapi">
-                    <p class='blog-ui-addQQ'> 点击加入QQ群: 731428117 </p>
+                    <p class='blog-ui-addQQ'> 
+                        有问题可以进qq 群交流下载资源也可以找群主免费
+                        <p>
+                            <img src="https://cdn.jsdelivr.net/gh/wandou-cc/blog-ui@20220920_V2/icon/QQ.jpeg"/>
+                        </p>
+                    </p>
                 </a>
 
                 <p class='blog-ui-issues'>
@@ -512,11 +513,13 @@
                 displayDom(item.domId, item.checked)
             }
         })
+
         // 点击登录注册按钮进行展示登录页面
         let loginShow = ['toolbar-btn-login', 'unlogin-comment-bt']
         loginShow.forEach(item => {
             let loginDom = getElement('.' + item)
             loginDom && loginDom.length != 0 && loginDom[0].addEventListener('click', () => {
+                console.log('dianji')
                 setTimeout(() => { getElement('.passport-login-container')[0].style.display = 'block' }, 500)
             })
         })
