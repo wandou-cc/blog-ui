@@ -103,4 +103,4 @@
 ## 联系方式
 有问题可以进qq 群交流下载资源也可以找群主`免费`下载  后期可能搞个自助下载  
 
-<img src="./icon/QQ.jpeg"/>
+<img src="https://cdn.jsdelivr.net/gh/wandou-cc/blog-ui@20220921_V1/icon/QQ.jpeg"/>

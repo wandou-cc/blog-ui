@@ -302,14 +302,16 @@ code {
 .box-shadow, 
 #kp_box_www_swiper_ban, 
 .blog-banner,
-.passport-login-container,
 .weixin-shadowbox,
 .feed-Sign-span,
 .feed-Sign-span .feed-Sign-style-old .open_app_channelCode,
 .btn_open_app_prompt_div,
-.passport-login-container,
 .dis-none,
 div[id^='dmp_ad_'],
 div[id^='kp_box_']{
+    display: none !important;
+}
+
+.passport-login-container {
     display: none;
 }

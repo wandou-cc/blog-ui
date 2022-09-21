@@ -2,8 +2,7 @@
 (function () {
     // @resource css https://cdn.jsdelivr.net/gh/wandou-cc/blog-ui@20220918_V1/index.css
     // @require      https://unpkg.com/better-scroll@latest/dist/better-scroll.min.js
-    // GM_addStyle(GM_getResourceText("css"));
-
+    GM_addStyle(GM_getResourceText("css"));
     const VERSION = '1.1.4'
     const TITLE = 'BLOGUI'
     const PRDTAR = '20220921_V1'
