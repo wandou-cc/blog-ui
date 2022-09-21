@@ -4,78 +4,145 @@
     // @require      https://unpkg.com/better-scroll@latest/dist/better-scroll.min.js
     // GM_addStyle(GM_getResourceText("css"));
 
-    const VERSION = '1.1.3'
+    const VERSION = '1.1.4'
     const TITLE = 'BLOGUI'
+    const PRDTAR = '20220921_V1'
 
     let ISH5 = null
     let CURRENTPAGES = null
 
     const CSDNCONFIG = {
         2: {
-            pc: {
-                webBlogTitle: "CSDN设置(pc)",
-                children: [
-                    // 左侧
-                    { domId: "#asideProfile", for: "CsdnAuthorInfo", label: "作者信息", checked: true },
-                    { domId: "#asidedirectory", for: "CsdnDirectory", label: "目录", checked: true },
-                    { domId: "#asideSearchArticle", for: "CsdnSerch", label: "搜索博主文章", checked: false },
-                    { domId: "#asideRank", for: "CsdnAsideRank", label: "是否入选", checked: false },
-                    { domId: "#asideHotArticle", for: "CsdnHotPage", label: "热门文章", checked: false },
-                    { domId: "#asideCategory", for: "CsdnCategory", label: "分类专栏", checked: false },
-                    { domId: "#asideNewComments", for: "CsdnComments", label: "最新评论", checked: false },
-                    { domId: "#asideNewNps", for: "CsdnNewNps", label: "推荐博客", checked: false },
-                    { domId: "#asideArchive", for: "CsdnArchive", label: "最新文章", checked: false },
-
-                    // /  底部相关推荐
-                    { domId: ".recommend-box", for: "CsdnRecommend", label: "底部相关推荐", checked: false },
-                    { domId: "#pcCommentBox", for: "CsdnpcCommentBox", label: "评论", checked: true },
-                    { domId: "#blogExtensionBox", for: "CsdnblogExtensionBox", label: "引流信息", checked: false },
-                    { domId: "#treeSkill", for: "CsdntreeSkill", label: "知识档案匹配", checked: false },
-
-                    // 顶部信息
-                    { domId: "", for: "Csdn2top", label: "顶部导航信息", checked: false, getEvent: removeTopbar },
-                    { domId: "", for: "CsdnSideToolbar ", label: "侧边悬浮(略有延迟)", checked: false, getEvent: removeSideToolbar },
-                ]
-            },
-            h5: {
-                webBlogTitle: "CSDN设置(h5)",
-                children: [
-                    // 底部相关推荐
-                    { domId: "#recommend", for: "CsdnH5Recommend", label: "底部相关推荐", checked: false },
-                    { domId: "#comment", for: "CsdnH5Comment", label: "底部登录", checked: false },
-                    { domId: ".openApp", for: "CsdnH5openApp", label: "打开App", checked: false },
-                    { domId: "#blogExtensionBox", for: "CsdnH5blogExtensionBox", label: "引流信息", checked: false },
-                    { domId: "", for: "CsdnH5operate", label: "底部操作是否固定", checked: false, getEvent: operate }
-                ]
-            }
+            pc: [
+                {
+                    title: "右侧选项",
+                    children: [
+                        // 左侧
+                        { type: "checked", domId: "#asideProfile", for: "CsdnAuthorInfo", label: "作者信息", checked: true },
+                        { type: "checked", domId: "#asidedirectory", for: "CsdnDirectory", label: "目录", checked: false },
+                        { type: "checked", domId: "#asideSearchArticle", for: "CsdnSerch", label: "搜索博主文章", checked: false },
+                        { type: "checked", domId: "#asideRank", for: "CsdnAsideRank", label: "是否入选", checked: false },
+                        { type: "checked", domId: "#asideHotArticle", for: "CsdnHotPage", label: "热门文章", checked: false },
+                        { type: "checked", domId: "#asideCategory", for: "CsdnCategory", label: "分类专栏", checked: false },
+                        { type: "checked", domId: "#asideNewComments", for: "CsdnComments", label: "最新评论", checked: false },
+                        { type: "checked", domId: "#asideNewNps", for: "CsdnNewNps", label: "推荐博客", checked: false },
+                        { type: "checked", domId: "#asideArchive", for: "CsdnArchive", label: "最新文章", checked: false },
+                    ]
+                },
+                {
+                    title: "文章底部",
+                    children: [
+                        { type: "checked", domId: ".recommend-box", for: "CsdnRecommend", label: "底部相关推荐", checked: false },
+                        { type: "checked", domId: "#pcCommentBox", for: "CsdnpcCommentBox", label: "评论", checked: false },
+                        { type: "checked", domId: "#blogExtensionBox", for: "CsdnblogExtensionBox", label: "引流信息", checked: false },
+                        { type: "checked", domId: "#treeSkill", for: "CsdntreeSkill", label: "知识档案匹配", checked: false },
+                    ]
+                }, {
+                    title: "顶部导航",
+                    children: [
+                        { type: "checked", domId: "", for: "Csdn2top", label: "顶部导航信息", checked: false, getEvent: 'removeTopbar' },
+                    ]
+                }, {
+                    title: "右下角悬浮",
+                    children: [
+                        { type: "checked", domId: "", for: "CsdnSideToolbar", label: "侧边悬浮(略有延迟)", checked: false, getEvent: 'removeSideToolbar' },
+                    ]
+                },
+                {
+                    title: "操作",
+                    children: [
+                        { type: "button", class: "buttoncolor1", label: "初始化当前页面配置", getEvent: 'clearCache("CSDNCONFIG", "2")' }
+                    ]
+                }
+            ],
+            h5: [
+                {
+                    title: "底部",
+                    children: [
+                        // 底部相关推荐
+                        { type: "checked", domId: "#recommend", for: "CsdnH5Recommend", label: "底部相关推荐", checked: false },
+                        { type: "checked", domId: "#comment", for: "CsdnH5Comment", label: "底部登录", checked: false },
+                        { type: "checked", domId: "#blogExtensionBox", for: "CsdnH5blogExtensionBox", label: "引流信息", checked: false },
+                        { type: "checked", domId: "", for: "CsdnH5operate", label: "底部操作是否固定", checked: false, getEvent: 'operate' }
+                    ]
+                }, {
+                    title: "顶部",
+                    children: [
+                        { type: "checked", domId: ".openApp", for: "CsdnH5openApp", label: "打开App", checked: false }
+                    ]
+                },
+                {
+                    title: "操作",
+                    children: [
+                        { type: "button", class: "buttoncolor1", label: "初始化当前页面配置", getEvent: 'clearCache("CSDNCONFIG", "2")' }
+                    ]
+                }
+            ]
         },
         3: {
-            pc: {
-                children: [
-                    { domId: "", for: "Csdn3top", label: "顶部导航信息", checked: false, getEvent: removeTopbar },
-                    { domId: ".blog-nps", for: "CsdnBlogNps", label: "推荐CSDN", checked: false },
-                    { domId: ".blog-slide-box .template", for: "Csdntemplate", label: "热门推荐/作者推荐", checked: true },
-                    { domId: ".blog-slide-box .blogTree", for: "CsdnblogTree", label: "技能树", checked: true },
-                    { domId: "", for: "CsdnblogNav", label: "平铺显示", getEvent: blogNav },
-                ]
-            }
+            pc: [
+                {
+                    title: "顶部导航",
+                    children: [
+                        { type: "checked", domId: "", for: "Csdn3top", label: "顶部导航信息", checked: false, getEvent: 'removeTopbar' },
+                        { type: "checked", domId: ".blog-nps", for: "CsdnBlogNps", label: "推荐CSDN", checked: false }
+                    ]
+                }, {
+                    title: "右侧",
+                    children: [
+                        { type: "checked", domId: ".blog-slide-box .template", for: "Csdntemplate", label: "热门推荐/作者推荐", checked: true },
+                        { type: "checked", domId: ".blog-slide-box .blogTree", for: "CsdnblogTree", label: "技能树", checked: true },
+                    ]
+                },
+                {
+                    title: "其他",
+                    children: [
+                        { type: "checked", domId: "", for: "CsdnblogNav", label: "平铺显示", getEvent: 'blogNav' }
+                    ]
+                },
+                {
+                    title: "操作",
+                    children: [
+                        { type: "button", class: "buttoncolor1", label: "初始化当前页面配置", getEvent: 'clearCache("CSDNCONFIG", "3")' }
+                    ]
+                }
+            ]
         },
         4: {
-            pc: {
-                children: [
-                    { domId: ".main-rt .so-questionnaire-body", for: "Csdnquestionnaire", label: "推荐CSDN", checked: false },
-                    { domId: ".main-rt .so-hot-words", for: "Csdnhot-words", label: "相关搜索", checked: false },
-                    { domId: ".main-rt .wrap-hot", for: "Csdnwrap-hot", label: "猜你想搜", checked: false },
-                    { domId: ".main-rt .so-items-taglist", for: "Csdntaglist", label: "相关标签", checked: false },
-                    { domId: "", for: "Csdn4top", label: "顶部导航信息", checked: false, getEvent: removeTopbar },
-                    { domId: "", for: "CsdnSoNav", label: "平铺显示(请勿与其他同用)", getEvent: soPc }
-                ]
-            }
+            pc: [
+                {
+                    title: "顶部导航",
+                    children: [
+                        { type: "checked", domId: "", for: "Csdn4top", label: "顶部导航信息", checked: false, getEvent: 'removeTopbar' }
+                    ]
+                },
+                {
+                    title: "右侧",
+                    children: [
+                        { type: "checked", domId: ".main-rt .so-questionnaire-body", for: "Csdnquestionnaire", label: "推荐CSDN", checked: false },
+                        { type: "checked", domId: ".main-rt .so-hot-words", for: "Csdnhot-words", label: "相关搜索", checked: false },
+                        { type: "checked", domId: ".main-rt .wrap-hot", for: "Csdnwrap-hot", label: "猜你想搜", checked: false },
+                        { type: "checked", domId: ".main-rt .so-items-taglist", for: "Csdntaglist", label: "相关标签", checked: false }
+                    ]
+                },
+                {
+                    title: "其他",
+                    children: [
+                        { type: "checked", domId: "", for: "CsdnSoNav", label: "平铺显示(请勿与其他同用)", getEvent: 'soPc' }
+                    ]
+                },
+                {
+                    title: "操作",
+                    children: [
+                        { type: "button", class: "buttoncolor1", label: "初始化当前页面配置", getEvent: 'clearCache("CSDNCONFIG", "4")' }
+                    ]
+                }
+            ]
         },
     }
     let asideWidth = '0px'
 
-    // ---------- 通用方法 -------------
+    // ---------- 通用方法 ------------
 
     // 通过当前地址获取现在是那个网站
     function initUrl() {
@@ -129,12 +196,10 @@
         dom.addEventListener(eventType, callback)
     }
 
-    // 添加复选框
-    function addCheckBoxDom(config, type) {
-        // let title = config.webBlogTitle
-        let configArr = config.children
-        let parentDom = getElement('.blog-ui-setting')[0]
+    // 生成虚拟节点
+    function addMain(config, type) {
 
+        let parentDom = getElement('.blog-ui-setting')[0]
         let parentVDom = render({
             tag: 'div',
             prop: { class: "blog-ui-csdn" },
@@ -146,67 +211,132 @@
             ]
         })
 
-        // let currentTitle = render({
-        //     tag: 'p',
-        //     prop: { class: "blog-ui-item-title" },
-        //     children: title
-        // })
-
-        // parentDom.appendChild(currentTitle)
         parentDom.appendChild(parentVDom)
-
         let itemDom = getElement('.blog-ui-csdn-main')[0]
 
-        configArr.forEach((item, index) => {
-            item.index = index
-            let checkObj = {
-                tag: "input",
-                prop: {
-                    "type": "checkbox",
-                    "id": item.for,
-                    "domId": item.domId,
-                    "index": item.index,
-                    "on": {
-                        change: (e) => {
-                            var target = e.target,
-                                targetTag = target.tagName;
-                            if (targetTag === "INPUT") {
-                                if (GM_listValues().includes(target.id)) {
-                                    GM_setValue(target.id, target.checked)
-                                }
+        config.forEach((configItem, index) => {
+            let vDom = render({
+                tag: 'div',
+                prop: { class: "blog-ui-item" },
+                children: [
+                    {
+                        tag: 'div',
+                        prop: { class: "blog-ui-config-title" },
+                        children: configItem.title
+                    },
+                    {
+                        tag: 'div',
+                        prop: { class: "blog-ui-config-center", parentIndex: index },
+                        children: actionDom(configItem.children, type)
+                    }
+                ]
+            })
+            itemDom.appendChild(vDom)
+        })
+    }
 
-                                var index = target.getAttribute('index');
-                                configArr[index].getEvent ? configArr[index]['getEvent'](target.checked) : setDomEvent(target, type)
+    // 操作区
+    function actionDom(configItem, type) {
+        let actionDom = []
+        for (let i = 0; i < configItem.length; i++) {
+            let checkObj = null
+            if (configItem[i].type === 'checked') {
+                checkObj = checkBox(configItem[i], type)
+            }
+            else if (configItem[i].type === 'button') {
+                checkObj = buttonBox(configItem[i])
+            }
+            actionDom.push(checkObj)
+
+        }
+
+   
+        return actionDom
+    }
+
+    // 生成多选框
+    function checkBox(item, type) {
+
+        let checkObj = {
+            tag: "input",
+            prop: {
+                "type": "checkbox",
+                "id": item.for,
+                "domId": item.domId,
+                "index": item.index,
+                "event": item.getEvent,
+                "on": {
+                    change: (e) => {
+                        var target = e.target,
+                            targetTag = target.tagName;
+                        if (targetTag === "INPUT") {
+                            if (GM_listValues().includes(target.id)) {
+                                GM_setValue(target.id, target.checked)
                             }
+                            var event = target.getAttribute('event')
+                            event != 'undefined' ? eval(`${event}(${target.checked})`) : setDomEvent(target, type)
                         }
                     }
                 }
             }
+        }
 
-            if (item.checked) {
-                checkObj.prop.checked = true
-            }
+        if (item.checked) {
+            checkObj.prop.checked = true
+        }
 
-            let currentDom = render({
-                tag: 'div',
-                prop: {
-                    "class": "setting-item"
-                },
-                children: [
-                    checkObj,
-                    {
-                        tag: "label",
-                        prop: {
-                            "class": "form-check-label",
-                            "for": item.for,
-                            "domId": item.domId
-                        },
-                        children: item.label
+        let currentDom = {
+            tag: 'div',
+            prop: {
+                "class": "setting-item"
+            },
+            children: [
+                checkObj,
+                {
+                    tag: "label",
+                    prop: {
+                        "class": "form-check-label",
+                        "for": item.for,
+                        "domId": item.domId
+                    },
+                    children: item.label
+                }
+            ]
+        }
+        return currentDom
+    }
+
+    // 生成按钮
+    function buttonBox(item) {
+        return {
+            tag: "button",
+            prop: {
+                class: item.class,
+                "on": {
+                    click: (e) => {
+                        var target = e.target,
+                            targetTag = target.tagName;
+                        if (targetTag == 'BUTTON') {
+                            eval(`${item['getEvent']}`)
+                        }
                     }
-                ]
-            })
-            itemDom.appendChild(currentDom)
+                }
+            },
+            children: item.label
+        }
+    }
+
+    // 初始化当前页面配置
+    function clearCache(plat,key) {
+        let config = eval(`${plat}[${key}]`)
+        config[ISH5 ? 'h5' : 'pc'].forEach(item => {
+            item.children.forEach( detailItem => {
+                if(detailItem.for && GM_listValues().includes(detailItem.for)) {
+                    GM_deleteValue(detailItem.for)
+                }
+            } )
         })
+        location.reload();
     }
 
     // 添加主页面
@@ -266,6 +396,9 @@
 
     // 设置隐藏显示
     function displayDom(domNode, type) {
+        if (!domNode) {
+            return
+        }
         // 对于一些动态加载的节点 如果没有查到就加入 一个错误队列中 每100毫秒查找一次
         let dom = getElement(domNode)
         let errorList = []
@@ -309,15 +442,16 @@
     function render(Vnode) {
         let { tag, prop, children } = Vnode
         let el = document.createElement(tag)
-        for (key in prop) {
-            el.setAttribute(key, prop[key]);
-            if (key === "on") {
-                incident = prop[key]
-                for (k in incident) {
-                    el.addEventListener(k, e => incident[k](e))
-                }
+        Object.keys(prop).forEach(item => {
+            el.setAttribute(item, prop[item]);
+            if (item === 'on') {
+                let eventObject = prop[item]
+                Object.keys(eventObject).forEach(eventItem => {
+                    el.addEventListener(eventItem, (e) => eventObject[eventItem](e))
+                })
             }
-        }
+        })
+
         if (children instanceof Array) {
             children.forEach((item) => {
                 el.appendChild(render(item));
@@ -331,9 +465,7 @@
     // 设置点击事件 在这里需要进行分发
     function setDomEvent(e, type) {
         let checkedFlag = e.checked
-        // let forName = e.id
         let domId = e.attributes.domid.value
-
         switch (type) {
             case 'CSDN': CSDNEvent(domId, checkedFlag)
         }
@@ -379,10 +511,9 @@
                 <p class='blog-ui-version'> 当前版本号: ${VERSION}</p>
                 <a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=RYQVnUPuE_KUnJqOztGM40OWHmiVd74g&jump_from=webapi">
                     <p class='blog-ui-addQQ'> 
-                        有问题可以进qq 群交流下载资源也可以找群主免费
-                        <p>
-                            <img src="https://cdn.jsdelivr.net/gh/wandou-cc/blog-ui@20220920_V2/icon/QQ.jpeg"/>
-                        </p>
+                        有问题可以进qq群交流,下载资源也可以找群主免费
+                        <br>
+                        <img src="https://cdn.jsdelivr.net/gh/wandou-cc/blog-ui@${PRDTAR}/icon/QQ.jpeg" width='250px'/>
                     </p>
                 </a>
 
@@ -396,6 +527,7 @@
                         &nbsp;&nbsp;&nbsp;<span>&nbsp;&nbsp;'好评' 给作者点个赞 </span>
                     </a>
                 </p>
+
                 <div class='blog-ui-advertis'>
                     <p class='advertis-warn'> 广告警告🪧 </p>
 
@@ -408,18 +540,16 @@
                     </a>
                 </div>
 
-
                 <div class='blog-ui-prompt'>
                     如果有问题或者建议可以及时联系群主或者github提issues, 我也很希望大家能提提意见, 我看到后会及时内回复各位, 祝各位使用愉快
                 </div>
 
                 <div class='statement'>
                      未来版本将要更新的功能：<br>
-                        1.将要对CSDN继续优化首页文章列表页<br>
-                        2.对CSDN下载资源对优化<br>
-                        3.添加博客园 掘金 知乎 简书 思否 等技术论坛等优化<br>
-                        4.可以对文章主要部分进行打印 PDF 获取<br>
-                        5.目前只想到这些吧 其他的 想起来在写
+                        1.对CSDN下载资源对优化<br>
+                        2.添加博客园 掘金 知乎 简书 思否 等技术论坛等优化<br>
+                        3.可以对文章主要部分进行打印 PDF 获取<br>
+                        4.目前只想到这些吧 其他的 想起来在写
                 </div>
                 <br>
             </div>
@@ -437,7 +567,7 @@
     function CSDNIsH5OrPC(id) {
         // h5 移动端端时候的主元素ID
         let dom = getElement(id)
-        if(dom && dom.length > 0) {
+        if (dom && dom.length > 0) {
             return true
         } else {
             return false
@@ -453,19 +583,27 @@
     // 初始化csdn配置
     function initCSDN(key) {
         let parentConfig = CSDNCONFIG[CURRENTPAGES][ISH5 ? 'h5' : 'pc']
-        if (parentConfig) {
+        if (parentConfig.length !== 0) {
+
             // 设置缓存中的内容 并更新 源配置文件
-            parentConfig.children.map(item => {
-                if (GM_listValues().includes(item.for)) {
-                    return item.checked = GM_getValue(item.for)
-                } else {
-                    GM_setValue(item.for, item.checked)
-                }
+            parentConfig.forEach((item) => {
+                item.children.forEach((childrenItem, index, arr) => {
+                    // 如果没有for 就证明不需要缓存
+                    if (!childrenItem.for) {
+                        return
+                    }
+                    if (GM_listValues().includes(childrenItem.for)) {
+                        arr[index].checked = GM_getValue(childrenItem.for)
+                    } else {
+                        GM_setValue(childrenItem.for, childrenItem.checked)
+                    }
+                })
             })
+
+            addMain(CSDNCONFIG[CURRENTPAGES][ISH5 ? 'h5' : 'pc'], 'CSDN')  // 设置复选框
             CSDNOoptimiz(key) // 进优化操作
-        } else {
-            log('当前页面没有配置项，如有需要请联系作者')
         }
+
     }
 
     // -------- csdn 通用 ---------
@@ -496,7 +634,6 @@
 
     // 优化开始
     function CSDNOoptimiz(key) {
-
         if (!ISH5) {
             let removeDom = ['#recommendNps', '.template-box', '.blog-footer-bottom', '#csdn-copyright-footer']
             // 删除可以直接通类名进行获取的元素
@@ -505,21 +642,23 @@
             })
         }
         // 进行刷新这之后的设置
-        CSDNCONFIG[CURRENTPAGES][ISH5 ? 'h5' : 'pc'].children.forEach(item => {
-            // 如果有事件那就去单独执行 否则就是 默认隐藏
-            if (item.getEvent) {
-                item['getEvent'](item.checked)
-            } else {
-                displayDom(item.domId, item.checked)
-            }
+        CSDNCONFIG[CURRENTPAGES][ISH5 ? 'h5' : 'pc'].forEach(configItem => {
+            configItem.children.forEach(item => {
+                // 如果有事件那就去单独执行 否则就是 默认隐藏
+                if (item.getEvent && !['button'].includes(item.type)) {
+                    // item['getEvent'](item.checked)
+                    eval(`${item.getEvent}(${item.checked})`)
+                } else {
+                    displayDom(item.domId, item.checked)
+                }
+            })
         })
 
         // 点击登录注册按钮进行展示登录页面
-        let loginShow = ['toolbar-btn-login', 'unlogin-comment-bt']
+        let loginShow = ['.toolbar-btn-login', '.unlogin-comment-bt']
         loginShow.forEach(item => {
-            let loginDom = getElement('.' + item)
+            let loginDom = getElement(item)
             loginDom && loginDom.length != 0 && loginDom[0].addEventListener('click', () => {
-                console.log('dianji')
                 setTimeout(() => { getElement('.passport-login-container')[0].style.display = 'block' }, 500)
             })
         })
@@ -655,8 +794,8 @@
         csdn.copyright.textData = ''
 
         // 删除原始的右侧
-        getElement('.recommend-right')[0].remove()
-
+        let rightDom = getElement('.recommend-right')
+        rightDom && rightDom[0].remove()
 
         // 关注博主才能查看
         let focusUP = getElement('.hide-article-box')
@@ -669,7 +808,7 @@
     // ------处理搜索列表---------
     // 列表页是否平铺展示
     function blogNav(checked) {
-    
+
         if (checked) {
             getElement('.home_wrap')[0].style.width = '95vw'
             getElement('.blog-content')[0].style.width = '75vw'
@@ -680,10 +819,17 @@
     }
 
     function soPc(checked) {
-        setTimeout(()=>{
+        setTimeout(() => {
             let mainDom = getElement('.clearfix')[0]
             checked ? mainDom.classList.remove('main') : mainDom.setAttribute('class', 'main clearfix')
-        },100)
+        }, 100)
+    }
+
+    function diyIntercept() {
+        document.body.onmouseout = (e) => {
+            console.log(e.target.clientHeight)
+            console.log(e.target.clientWidth)
+        }
     }
 
     // -------- 主函数 -------------
@@ -692,35 +838,28 @@
         let urlObject = initUrl()
         jumpLink()
 
-        if(!urlObject) {
+        ISH5 = CSDNIsH5OrPC('.csdn-toolbar')
+
+        if (!CSDNCONFIG[CURRENTPAGES][ISH5 ? 'h5' : 'pc'] || !urlObject) {
             log(`当前页面无优化，如果需要请联系作者`)
             return
         }
+        log(`当前正在优化 ${urlObject.title}  使用愉快！有问题请联系作者`)
 
-        let isH5List = ['', '#article', '.feedlist_mod', '.openApp']
-
-        ISH5 = CSDNIsH5OrPC(isH5List[urlObject.key - 1])
-
-        if(!CSDNCONFIG[CURRENTPAGES][ISH5 ? 'h5' : 'pc']) {
-            log(`当前页面无优化，如果需要请联系作者`)
-            return
-        }
-
-        let tipString = `当前正在优化 ${urlObject.title}  使用愉快！有问题请联系作者`
-        log(tipString)
-
+        domHtml()
         switch (urlObject.platform) {
             case 'CSDN': initCSDN(urlObject.key)
         }
-    
-        domHtml()
 
-        addCheckBoxDom(CSDNCONFIG[CURRENTPAGES][ISH5 ? 'h5' : 'pc'], urlObject.platform)  // 设置复选框
         appendDom()
+        // initScrool()
 
         // 设置鼠标移入svg 显示主菜单
         addEvent('#blog-ui-main', 'mouseenter', (e) => {
             addCss('#blog-main', { display: 'inherit' })
+            if (getElement('.bscroll-vertical-scrollbar')) {
+                return
+            }
             initScrool()
         })
 
@@ -728,26 +867,9 @@
             addCss('#blog-main', { display: 'none' })
         })
 
-
-
-        // addEvent('#blog-ui-main', 'click', (e) => {
-        //     e.stopPropagation()
-        //     addCss('#blog-main', { display: 'inherit' })
-        //     initScrool()
-        // })
-
-        // document.body.onclick = (e) => {
-        //     console.log(e)
-        //     getElement('#blog-main')[0].style.display = 'none'
-        // }
-
-
     }
 
     log(`脚本启动成功, 欢迎使用${TITLE} 版本:${VERSION}`)
     mainInit()
-
-
-
 
 })();

@@ -128,11 +128,18 @@ a:active {
 }
 
 .blog-ui-setting {
-    border-top: 1px solid #ccc;
+    /* border-top: 1px solid #ccc; */
+    padding-top: 10px;
     height: 435px;
     position: relative;
     overflow: hidden;
     white-space: nowrap
+}
+
+.blog-ui-config-title {
+    padding: 5px;
+    font-weight: 800;
+    /* border-bottom: 1px solid #ccc; */
 }
 
 .blog-ui-item-title {
@@ -140,11 +147,35 @@ a:active {
     margin: 10px 0px;
 }
 
+.blog-ui-item {
+    margin: 0px 8px;
+}
+
 .blog-ui-csdn-main {
     margin-top: 20px;
     display: flex !important;
-    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+.blog-ui-config-center {
+    display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.blog-ui-config-center button {
+    padding: 5px 10px;
+    border-radius: 3px;
+    color: #fff;
+    border: none 0 !important; 
+    cursor: pointer;
+}
+
+.buttoncolor1 {
+    background-image: linear-gradient(45deg, #13547a 0%, #80d0c7 100%);
+}
+.buttoncolor2 {
+    background-image: linear-gradient(60deg, #96deda 0%, #50c9c3 100%);
 }
 
 .setting-item {
@@ -157,9 +188,6 @@ a:active {
 .form-check-label {
     margin-left: 10px;
 }
-
-
-
 
 .dialog-dom {
     position: fixed;
@@ -264,7 +292,7 @@ code {
 }
 
 .blog-ui-advertis img {
-    width: 30px;
+    width: 28px;
     height:35px;
     margin: 10px;
 }
@@ -280,8 +308,8 @@ code {
 .feed-Sign-span .feed-Sign-style-old .open_app_channelCode,
 .btn_open_app_prompt_div,
 .passport-login-container,
-.dis-none
-{
+.dis-none,
+div[id^='dmp_ad_'],
+div[id^='kp_box_']{
     display: none;
 }
-
