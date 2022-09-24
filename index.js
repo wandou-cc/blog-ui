@@ -1,11 +1,34 @@
+// ==UserScript==
+// @name         ⚡️ 最新CSDN优化插件 独家UI排版 更方便您的阅读📖 去广告🪧 免登录复制 一键复制 劫持剪贴板 持续更新 🆓免费代下载资源
+// @namespace    https://github.com/wandou-cc/blog-ui
+// @version      1.1.5
+// @description  ⚡️ 最新CSDN优化插件｜💫全新布局｜🫥去掉一些花里胡哨的组件，阅读更加清晰｜🐯基本实现显示部分由用户自己定制｜🌈直接一键复制 不在需要登录｜✨展开所有折叠代码，简化操作｜支持移动端PC端通通优化｜对于积分会员下载联系群主免费下载｜入口支持拖拽放置
+// @author       wandou-cc
+// @include      *://*.csdn.net/*
+
+// @resource css https://cdn.jsdelivr.net/gh/wandou-cc/blog-ui@20220921_V1/index.css
+// @require      https://unpkg.com/better-scroll@latest/dist/better-scroll.min.js
+
+// @icon         data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gIoSUNDX1BST0ZJTEUAAQEAAAIYAAAAAAQwAABtbnRyUkdCIFhZWiAAAAAAAAAAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAAHRyWFlaAAABZAAAABRnWFlaAAABeAAAABRiWFlaAAABjAAAABRyVFJDAAABoAAAAChnVFJDAAABoAAAAChiVFJDAAABoAAAACh3dHB0AAAByAAAABRjcHJ0AAAB3AAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAFgAAAAcAHMAUgBHAEIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFhZWiAAAAAAAABvogAAOPUAAAOQWFlaIAAAAAAAAGKZAAC3hQAAGNpYWVogAAAAAAAAJKAAAA+EAAC2z3BhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABYWVogAAAAAAAA9tYAAQAAAADTLW1sdWMAAAAAAAAAAQAAAAxlblVTAAAAIAAAABwARwBvAG8AZwBsAGUAIABJAG4AYwAuACAAMgAwADEANv/bAEMAUDc8RjwyUEZBRlpVUF94yIJ4bm549a+5kcj////////////////////////////////////////////////////bAEMBVVpaeGl464KC6//////////////////////////////////////////////////////////////////////////AABEIA/IDmAMBIgACEQEDEQH/xAAZAAEAAwEBAAAAAAAAAAAAAAAAAgMEAQX/xAAtEAEAAgECBAUFAQEBAQEBAAAAAQIDETEEEiFRMjNBYXETIlKBkUKhFCNisf/EABcBAQEBAQAAAAAAAAAAAAAAAAABAgP/xAAcEQEBAQEBAQEBAQAAAAAAAAAAARExQSECElH/2gAMAwEAAhEDEQA/AJgMMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA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
+// @grant        unsafeWindow
+// @grant        GM_addStyle
+// @grant        GM_getResourceText
+// @grant        GM_setValue
+// @grant        GM_getValue
+// @grant        GM_deleteValue
+// @grant        GM_listValues
+// @license      MIT License
+// @note         1.1.5 增加暴力猴支持｜入口支持拖动放置｜优化滚动条
+// @noframes
+
+// ==/UserScript==
 
 (function () {
-    // @resource css https://cdn.jsdelivr.net/gh/wandou-cc/blog-ui@20220918_V1/index.css
-    // @require      https://unpkg.com/better-scroll@latest/dist/better-scroll.min.js
+    // @include      *://juejin.cn/*
     GM_addStyle(GM_getResourceText("css"));
-    const VERSION = '1.1.4'
+    const VERSION = '1.1.5'
     const TITLE = 'BLOGUI'
-    const PRDTAR = '20220921_V1'
+    const PRDTAR = '20220924_V1'
 
     let ISH5 = null
     let CURRENTPAGES = null
@@ -138,6 +161,42 @@
                 }
             ]
         },
+        5: {
+            pc: [
+                {
+                    title: "顶部",
+                    children: [
+                        { type: "checked", label: "顶部操作", for: "JuejinTop", checked: false, getEvent: 'JuejinTop' }
+                    ]
+                },
+                {
+                    title: "右边栏",
+                    children: [
+                        { type: "checked", domId: ".sidebar-block", for: "JuejinAuthor", label: "作者信息", checked: true },
+                        { type: "checked", domId: ".sticky-block-box", for: "JuejinSticky", label: "目录", checked: true },
+                        { type: "checked", domId: ".sidebar-bd-entry", for: "JuejinSidebar", label: "挑战", checked: false },
+                        { type: "checked", domId: ".next-article", for: "JuejinNext-article", label: "下一篇", checked: false },
+                        { type: "checked", domId: ".related-entry-sidebar-block", for: "JuejinRelated", label: "相关文章", checked: false },
+                    ]
+                },
+                {
+                    title: "底部",
+                    children: [
+                        { type: "checked", domId: ".column-container", for: "JuejinContainer", label: "收录", checked: false },
+                        { type: "checked", domId: ".extension-banner", for: "JuejinExtension-banner", label: "插件", checked: false },
+                        { type: "checked", domId: ".category-course-recommend", for: "JuejiCategory", label: "相关课程", checked: false },
+                        { type: "checked", domId: ".comment-list-box", for: "JuejinComment", label: "评论", checked: false },
+                        { type: "checked", domId: ".recommended-area", for: "JuejinRecommended", label: "相关推荐", checked: false },
+                    ]
+                },
+                {
+                    title: "操作",
+                    children: [
+                        { type: "button", class: "buttoncolor1", label: "初始化当前页面配置", getEvent: 'clearCache("CSDNCONFIG", "5")' }
+                    ]
+                }
+            ]
+        },
     }
     let asideWidth = '0px'
 
@@ -148,8 +207,9 @@
         let url = window.location.href
         let urlResList = [
             { platform: 'CSDN', reg: /.*blog.csdn.net.*\/details\/.*/, title: 'CSDN详情优化', key: 2 },
-            { platform: 'CSDN', reg: /.*blog.csdn.net\/nav.*/, title: 'CSDN文章列表优化', key: 3 },
+            { platform: 'CSDN', reg: /.*blog.csdn.net\/nav.*/, title: 'CSDN文章类型列表优化', key: 3 },
             { platform: 'CSDN', reg: /.*so.csdn.net\/.*/, title: 'CSDN搜索页面', key: 4 },
+            { platform: 'Juejin', reg: /juejin.cn\/post\/.*/, title: '掘金文章详情', key: 5 },
         ]
 
         for (let i = 0; i < urlResList.length; i++) {
@@ -193,6 +253,28 @@
     function addEvent(className, eventType, callback) {
         let dom = getElement(className)[0]
         dom.addEventListener(eventType, callback)
+    }
+
+    // 设置缓存更改 配置文件
+    function generalCetch() {
+        let parentConfig = CSDNCONFIG[CURRENTPAGES][ISH5 ? 'h5' : 'pc']
+        if (parentConfig.length !== 0) {
+            // 设置缓存中的内容 并更新 源配置文件
+            parentConfig.forEach((item) => {
+                item.children.forEach((childrenItem, index, arr) => {
+                    // 如果没有for 就证明不需要缓存
+                    if (!childrenItem.for) {
+                        return
+                    }
+                    if (GM_listValues().includes(childrenItem.for)) {
+                        arr[index].checked = GM_getValue(childrenItem.for)
+                    } else {
+                        GM_setValue(childrenItem.for, childrenItem.checked)
+                    }
+                })
+            })
+            addMain(CSDNCONFIG[CURRENTPAGES][ISH5 ? 'h5' : 'pc'], 'CSDN')  // 生成虚拟节点
+        }
     }
 
     // 生成虚拟节点
@@ -249,13 +331,12 @@
 
         }
 
-   
+
         return actionDom
     }
 
     // 生成多选框
     function checkBox(item, type) {
-
         let checkObj = {
             tag: "input",
             prop: {
@@ -326,14 +407,14 @@
     }
 
     // 初始化当前页面配置
-    function clearCache(plat,key) {
+    function clearCache(plat, key) {
         let config = eval(`${plat}[${key}]`)
         config[ISH5 ? 'h5' : 'pc'].forEach(item => {
-            item.children.forEach( detailItem => {
-                if(detailItem.for && GM_listValues().includes(detailItem.for)) {
+            item.children.forEach(detailItem => {
+                if (detailItem.for && GM_listValues().includes(detailItem.for)) {
                     GM_deleteValue(detailItem.for)
                 }
-            } )
+            })
         })
         location.reload();
     }
@@ -472,21 +553,21 @@
 
     // 初始化滚动条
     function initScrool() {
-        setTimeout(() => {
-            let wrapper = getElement('.blog-ui-setting')[0]
-            BetterScroll.createBScroll(wrapper, {
-                probeType: 3,
-                pullUpLoad: true,
-                mouseWheel: true,
-                scrollY: true,
-                scrollX: false,
-                scrollbar: {
-                    fade: true,
-                    interactive: true,
-                    scrollbarTrackClickable: true
-                }
-            })
-        }, 1000)
+        // setTimeout(() => {
+        let wrapper = getElement('.blog-ui-setting')[0]
+        BetterScroll.createBScroll(wrapper, {
+            probeType: 3,
+            pullUpLoad: true,
+            mouseWheel: true,
+            scrollY: true,
+            scrollX: false,
+            scrollbar: {
+                fade: true,
+                interactive: true,
+                scrollbarTrackClickable: true
+            }
+        })
+        // }, 1000)
     }
 
     // 添加外部样式
@@ -508,7 +589,7 @@
                     </a>
                 </p>
                 <p class='blog-ui-version'> 当前版本号: ${VERSION}</p>
-                <a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=RYQVnUPuE_KUnJqOztGM40OWHmiVd74g&jump_from=webapi">
+                <a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=KBoDLbs7o7cLxBwKbBij0RNdNPslJ-HS&jump_from=webapi&authKey=zBON7pCcMJkpGoufA4QHOBHFNVYrJ6exGexad89wzgTpSLozInSnoGgQSEGhgMEp">
                     <p class='blog-ui-addQQ'> 
                         有问题可以进qq群交流,下载资源也可以找群主免费
                         <br>
@@ -557,9 +638,106 @@
         let createDom = document.createElement('div')
         createDom.innerHTML = html
         parentDom.appendChild(createDom)
+    }
+
+    function initMainEvent() {
+        // 设置鼠标移入svg 显示主菜单
+        addEvent('#blog-ui-main', 'mouseenter', (e) => {
+            addCss('#blog-main', { display: 'inherit' })
+            if (getElement('.bscroll-vertical-scrollbar').length !== 0) {
+                getElement('.bscroll-vertical-scrollbar')[0].remove()
+            }
+            getElement('.blog-ui-csdn')[0].style.transform = 'translateX(0px) translateY(0px) translateZ(1px)'
+            initScrool()
+        })
+
+        var screen_width = document.body.offsetWidth;
+        var screen_height = window.innerHeight;
+
+        let father = getElement('#blogUiApp')[0]
+        if (GM_getValue('x')) {
+            father.style.top = GM_getValue('y')
+            father.style.left = GM_getValue('x')
+        }
+
+        addEvent('#blog-ui-main', 'mousedown', (e) => {
+            var x = e.pageX - father.offsetLeft
+            var y = e.pageY - father.offsetTop
+            function move(e) {
+                let Py = e.pageY - y
+                let Px = e.pageX - x
+                father.style.top = Py + 'px'
+                father.style.left = Px + 'px'
+
+                if (Py < 20) {
+                    father.style.top = 20 + 'px'
+                } else if (Py > (screen_height - 50)) {
+                    father.style.top = screen_height - 50 + 'px'
+                }
+
+                if (Px < 5) {
+                    father.style.left = 5 + 'px'
+                } else if (Px > (screen_width - 50)) {
+                    father.style.left = screen_width - 50 + 'px'
+                    getElement('#blog-ui-main')[0].style.reight = '5px'
+                }
+
+                GM_setValue('x', father.style.left)
+                GM_setValue('y', father.style.top)
+            }
+            document.addEventListener('mousemove', move)
+            document.addEventListener('mouseup', function () {
+                document.removeEventListener('mousemove', move)
+            })
+        })
+
+        addEvent('#blog-main', 'mouseleave', () => {
+            addCss('#blog-main', { display: 'none' })
+        })
+    }
+
+    // ------- 掘金专区 ---------
+    function JuejinIsH5OrPC() {
+        return false
+    }
+
+    function JuejinOptimiz() {
+        // setTimeout(() => {
+        //     addCss('.main-container', {
+        //         "width": '90vw',
+        //         'max-width': '90vw'
+        //     })
+        // }, 500)
+        // 没有登陆的时候 顶部的处理
+        let noLoginDisplay = ['.creator-item', '.vip-entry']
+        let isLogin = getElement('.login-button')[0]
+        noLoginDisplay.forEach(item=>{
+            getElement(item)[0].style.display = isLogin ? 'none' : 'block'
+        })
+
+        window.onscroll = (e) => {
+            let scrollTop = document.documentElement.scrollTop || window.pageYOffset ||document.body.scrollTop
+            // 如果卷曲高度 》 前面几个元素的和 那就设置目录的类名
+            // if(scrollTop == )
+        }
 
 
     }
+
+    // 掘金顶部数据处理
+    function JuejinTop(checked) {
+        let topList = getElement('.phone-hide .nav-item')
+        topList.forEach((item, index) => {
+            if (index != 0) {
+                if(item.getAttribute('tag') == 'li') {
+                    item.style.display = checked ? 'flex' : 'none'
+                } else {
+                    item.style.display = checked ? 'block' : 'none'
+                }
+            }
+        })
+    }
+
 
     // ----------- CSDN 专区 ----------
 
@@ -579,31 +757,6 @@
         (!ISH5 && CURRENTPAGES == 2) ? setAside() : '' // 点击之后进行判断是不是没有右侧的侧边栏了
     }
 
-    // 初始化csdn配置
-    function initCSDN(key) {
-        let parentConfig = CSDNCONFIG[CURRENTPAGES][ISH5 ? 'h5' : 'pc']
-        if (parentConfig.length !== 0) {
-
-            // 设置缓存中的内容 并更新 源配置文件
-            parentConfig.forEach((item) => {
-                item.children.forEach((childrenItem, index, arr) => {
-                    // 如果没有for 就证明不需要缓存
-                    if (!childrenItem.for) {
-                        return
-                    }
-                    if (GM_listValues().includes(childrenItem.for)) {
-                        arr[index].checked = GM_getValue(childrenItem.for)
-                    } else {
-                        GM_setValue(childrenItem.for, childrenItem.checked)
-                    }
-                })
-            })
-
-            addMain(CSDNCONFIG[CURRENTPAGES][ISH5 ? 'h5' : 'pc'], 'CSDN')  // 设置复选框
-            CSDNOoptimiz(key) // 进优化操作
-        }
-
-    }
 
     // -------- csdn 通用 ---------
     // 处理顶部
@@ -640,18 +793,7 @@
                 displayDom(item, false)
             })
         }
-        // 进行刷新这之后的设置
-        CSDNCONFIG[CURRENTPAGES][ISH5 ? 'h5' : 'pc'].forEach(configItem => {
-            configItem.children.forEach(item => {
-                // 如果有事件那就去单独执行 否则就是 默认隐藏
-                if (item.getEvent && !['button'].includes(item.type)) {
-                    // item['getEvent'](item.checked)
-                    eval(`${item.getEvent}(${item.checked})`)
-                } else {
-                    displayDom(item.domId, item.checked)
-                }
-            })
-        })
+
 
         // 点击登录注册按钮进行展示登录页面
         let loginShow = ['.toolbar-btn-login', '.unlogin-comment-bt']
@@ -781,13 +923,18 @@
             blog_container_aside.style['width'] = asideWidth
         })
         observe.observe(blog_container_aside, { attributes: true });
-        let toolbar = getElement('.left-toolbox')[0]
-        toolbar.setAttribute('style', 'position: relative; z-index: 99;bottom: 0px;width: 100%;')
 
-        // 滚动设置右侧的侧边栏
-        window.onscroll = () => {
-            toolbar.setAttribute('style', 'position: relative; z-index: 99;bottom: 0px;width: 100%;')
-        }
+        // 设置底部关注一栏
+        let toolbar = getElement('.left-toolbox')[0]
+        toolbar.classList.add('observeToolbar')
+
+        let observeToolbar = new MutationObserver((list) => {
+            list.forEach(item => {
+                item.target.classList.add('observeToolbar')
+                observeToolbar.disconnect();
+            })
+        })
+        observeToolbar.observe(toolbar, { attributes: true })
 
         // 去除剪贴板劫持
         csdn.copyright.textData = ''
@@ -837,38 +984,46 @@
         let urlObject = initUrl()
         jumpLink()
 
-        ISH5 = CSDNIsH5OrPC('.csdn-toolbar')
+        // 不同平台是不是H5
+        switch (urlObject.platform) {
+            case 'CSDN': ISH5 = CSDNIsH5OrPC('.csdn-toolbar'); break;
+            case 'Juejin': ISH5 = JuejinIsH5OrPC(); break;
+        }
 
-        if (!CSDNCONFIG[CURRENTPAGES][ISH5 ? 'h5' : 'pc'] || !urlObject) {
+        if (CURRENTPAGES && !CSDNCONFIG[CURRENTPAGES][ISH5 ? 'h5' : 'pc'] || !urlObject) {
             log(`当前页面无优化，如果需要请联系作者`)
             return
         }
-        log(`当前正在优化 ${urlObject.title}  使用愉快！有问题请联系作者`)
-
+        // 生成主窗口
         domHtml()
+        generalCetch()
+
+        // 进行刷新这之后的设置
+        CSDNCONFIG[CURRENTPAGES][ISH5 ? 'h5' : 'pc'].forEach(configItem => {
+            configItem.children.forEach(item => {
+                // 如果有事件那就去单独执行 否则就是 默认隐藏
+                if (item.getEvent && !['button'].includes(item.type)) {
+                    // item['getEvent'](item.checked)
+                    eval(`${item.getEvent}(${item.checked})`)
+                } else {
+                    displayDom(item.domId, item.checked)
+                }
+            })
+        })
+
         switch (urlObject.platform) {
-            case 'CSDN': initCSDN(urlObject.key)
+            case 'CSDN': CSDNOoptimiz(urlObject.key); break;
+            case 'Juejin': JuejinOptimiz(urlObject.key); break;
         }
-
+        // 生成附加信息
         appendDom()
-        // initScrool()
+        initMainEvent()
 
-        // 设置鼠标移入svg 显示主菜单
-        addEvent('#blog-ui-main', 'mouseenter', (e) => {
-            addCss('#blog-main', { display: 'inherit' })
-            if (getElement('.bscroll-vertical-scrollbar')) {
-                return
-            }
-            initScrool()
-        })
-
-        addEvent('#blog-main', 'mouseleave', () => {
-            addCss('#blog-main', { display: 'none' })
-        })
-
+        log(`当前正在优化 ${urlObject.title}  使用愉快！有问题请联系作者`)
     }
 
     log(`脚本启动成功, 欢迎使用${TITLE} 版本:${VERSION}`)
+
     mainInit()
 
 })();

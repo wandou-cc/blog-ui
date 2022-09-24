@@ -10,7 +10,7 @@ a:active {
     position: fixed;
     left: 5px;
     top: 150px;
-    z-index: 1001;
+    z-index: 9999;
 }
 
 .position {
@@ -21,8 +21,8 @@ a:active {
 
 #blog-ui-main {
     position: absolute;
-    left: 5px;
-    top: 5px;
+    left: 8px;
+    top: 8px;
     cursor: pointer;
     box-shadow: 0 0 10px #ccc;
     border-radius: 5px;
@@ -68,7 +68,7 @@ a:active {
 
 #blog-main {
     position: absolute;
-    height: 500px;
+    height: 60vh;
     width: 400px;
     top: -10px;
     left: -3px;
@@ -130,7 +130,8 @@ a:active {
 .blog-ui-setting {
     /* border-top: 1px solid #ccc; */
     padding-top: 10px;
-    height: 435px;
+    height: calc(60vh - 80px);
+
     position: relative;
     overflow: hidden;
     white-space: nowrap
@@ -315,3 +316,19 @@ div[id^='kp_box_']{
 .passport-login-container {
     display: none;
 }
+
+
+.observeToolbar {
+    position: relative !important; 
+    z-index: 99 !important;
+    bottom: 0px !important;
+    width: 100% !important;
+}
+
+
+/* juejin */
+
+.guide-collect-popover , .vip-content, .app-download-sidebar-block {
+    display: none !important;
+}
+
