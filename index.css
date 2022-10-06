@@ -30,7 +30,7 @@ a:active {
     width: 28px !important;
     height: 28px !important;
     z-index: 999 !important;
-    /* opacity: 0.5; */
+    opacity: 0.6;
     animation: svgAnimation 10s infinite;
 }
 
@@ -325,10 +325,29 @@ div[id^='kp_box_']{
     width: 100% !important;
 }
 
+/* 单选 */
+.radio-item {
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+.radio-label {
+    margin-left: 10px;
+}
+
+.bodyWhite {
+    background: #eee !important;
+}
+
+.default-menu {
+    position: fixed;
+    top: 56px;
+    display: block;
+}
 
 /* juejin */
 
 .guide-collect-popover , .vip-content, .app-download-sidebar-block {
     display: none !important;
 }
-
