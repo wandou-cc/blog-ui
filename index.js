@@ -1,10 +1,11 @@
 // ==UserScript==
 // @name         ⚡️ 最新CSDN优化插件 独家UI排版 更方便您的阅读📖 去广告🪧 免登录复制 一键复制 劫持剪贴板 持续更新 🆓免费代下载资源
 // @namespace    https://github.com/wandou-cc/blog-ui
-// @version      1.1.6
+// @version      1.2.7
 // @description  ⚡️ 最新CSDN优化插件｜💫全新布局｜🫥去掉一些花里胡哨的组件，阅读更加清晰｜🐯基本实现显示部分由用户自己定制｜🌈直接一键复制 不在需要登录｜✨展开所有折叠代码，简化操作｜支持移动端PC端通通优化｜对于积分会员下载联系群主免费下载｜入口支持拖拽放置
 // @author       wandou-cc
 // @include      *://*.csdn.net/*
+// @include      *://*juejin.cn/*
 
 // @resource css https://cdn.jsdelivr.net/gh/wandou-cc/blog-ui@20221006_V1/index.css
 // @require      https://unpkg.com/better-scroll@latest/dist/better-scroll.min.js
@@ -18,23 +19,23 @@
 // @grant        GM_deleteValue
 // @grant        GM_listValues
 // @license      MIT License
-// @note         1.1.6 居中 ｜ 白色背景 ｜ 锁定目录 
+// @note         1.2.7 添加掘金
 // @noframes
 
 // ==/UserScript==
 
 (function () {
-    // @include      *://juejin.cn/*
     GM_addStyle(GM_getResourceText("css"));
-    const VERSION = '1.1.6'
+    const VERSION = '1.2.7'
     const TITLE = 'BLOGUI'
     const PRDTAR = '20221006_V1'
 
     let ISH5 = null
     let CURRENTPAGES = null
 
-    const CSDNCONFIG = {
+    const BLOGUICONFIG = {
         2: {
+            webType: "CSDN",
             pc: [
                 {
                     title: "查看模式",
@@ -85,7 +86,7 @@
                 {
                     title: "操作",
                     children: [
-                        { type: "button", class: "buttoncolor1", label: "初始化当前页面配置", getEvent: 'clearCache("CSDNCONFIG", "2")' }
+                        { type: "button", class: "buttoncolor1", label: "初始化当前页面配置", getEvent: 'clearCache("BLOGUICONFIG", "2")' }
                     ]
                 }
             ],
@@ -108,12 +109,13 @@
                 {
                     title: "操作",
                     children: [
-                        { type: "button", class: "buttoncolor1", label: "初始化当前页面配置", getEvent: 'clearCache("CSDNCONFIG", "2")' }
+                        { type: "button", class: "buttoncolor1", label: "初始化当前页面配置", getEvent: 'clearCache("BLOGUICONFIG", "2")' }
                     ]
                 }
             ]
         },
         3: {
+            webType: "CSDN",
             pc: [
                 {
                     title: "顶部导航",
@@ -137,12 +139,13 @@
                 {
                     title: "操作",
                     children: [
-                        { type: "button", class: "buttoncolor1", label: "初始化当前页面配置", getEvent: 'clearCache("CSDNCONFIG", "3")' }
+                        { type: "button", class: "buttoncolor1", label: "初始化当前页面配置", getEvent: 'clearCache("BLOGUICONFIG", "3")' }
                     ]
                 }
             ]
         },
         4: {
+            webType: "CSDN",
             pc: [
                 {
                     title: "顶部导航",
@@ -168,29 +171,43 @@
                 {
                     title: "操作",
                     children: [
-                        { type: "button", class: "buttoncolor1", label: "初始化当前页面配置", getEvent: 'clearCache("CSDNCONFIG", "4")' }
+                        { type: "button", class: "buttoncolor1", label: "初始化当前页面配置", getEvent: 'clearCache("BLOGUICONFIG", "4")' }
                     ]
                 }
             ]
         },
         5: {
+            webType: "JUEJIN",
             pc: [
+                // {
+                //     title: "掘金自带阅读",
+                //     children: [
+                //         { type: "checked", label: "沉浸阅读", for: "JuejinImmersion", checked: true, getEvent: 'JuejinImmersion' }
+                //     ]
+                // },
+                // {
+                //     title: "查看模式",
+                //     children: [
+                //         { type: "radio", for: "JuejinRadioC", label: "居中显示", checked: true, getEvent: 'juejinRadioC' },
+                //         { type: "radio", for: "JuejinRadioP", label: "铺平展示", checked: false, getEvent: 'juejinRadioP' },
+                //     ]
+                // },
                 {
                     title: "顶部",
                     children: [
                         { type: "checked", label: "顶部操作", for: "JuejinTop", checked: false, getEvent: 'JuejinTop' }
                     ]
                 },
-                {
-                    title: "右边栏",
-                    children: [
-                        { type: "checked", domId: ".sidebar-block", for: "JuejinAuthor", label: "作者信息", checked: true },
-                        { type: "checked", domId: ".sticky-block-box", for: "JuejinSticky", label: "目录", checked: true },
-                        { type: "checked", domId: ".sidebar-bd-entry", for: "JuejinSidebar", label: "挑战", checked: false },
-                        { type: "checked", domId: ".next-article", for: "JuejinNext-article", label: "下一篇", checked: false },
-                        { type: "checked", domId: ".related-entry-sidebar-block", for: "JuejinRelated", label: "相关文章", checked: false },
-                    ]
-                },
+                // {
+                //     title: "右边栏",
+                //     children: [
+                //         { type: "checked", domId: ".author-block", for: "JuejinAuthor", label: "作者信息", checked: true },
+                //         { type: "checked", domId: ".sticky-block-box", for: "JuejinSticky", label: "目录", checked: true },
+                //         { type: "checked", domId: ".sidebar-bd-entry", for: "JuejinSidebar", label: "挑战", checked: false },
+                //         { type: "checked", domId: ".next-article", for: "JuejinNext-article", label: "下一篇", checked: false },
+                //         { type: "checked", domId: ".related-entry-sidebar-block", for: "JuejinRelated", label: "相关文章", checked: false },
+                //     ]
+                // },
                 {
                     title: "底部",
                     children: [
@@ -204,11 +221,50 @@
                 {
                     title: "操作",
                     children: [
-                        { type: "button", class: "buttoncolor1", label: "初始化当前页面配置", getEvent: 'clearCache("CSDNCONFIG", "5")' }
+                        { type: "button", class: "buttoncolor1", label: "初始化当前页面配置", getEvent: 'clearCache("BLOGUICONFIG", "5")' }
                     ]
                 }
             ]
         },
+        6: {
+            webType: "JUEJIN",
+            pc: [
+                {
+                    title: "顶部",
+                    children: [
+                        { type: "checked", label: "顶部操作", for: "JuejinTop", checked: false, getEvent: 'JuejinTop' }
+                    ]
+                },
+                {
+                    title: "右边广告",
+                    children: [
+                        { type: "checked", domId: ".signin-tip", for: "JuejinSignin", label: "签到", checked: true },
+                        { type: "checked", domId: ".banner-block", for: "JuejinBanner", label: "侧边banner", checked: false },
+                        { type: "checked", domId: ".user-block", for: "JuejinUserBlock", label: "作者榜", checked: false },
+                        { type: "checked", domId: ".link-block", for: "JuejinLinkBlock", label: "插件列表", checked: false },
+                        { type: "checked", domId: ".index-aside-footer", for: "JuejinAsideFoot", label: "底部版权", checked: false },
+                    ]
+                },
+                {
+                    title: "操作",
+                    children: [
+                        { type: "button", class: "buttoncolor1", label: "初始化当前页面配置", getEvent: 'clearCache("BLOGUICONFIG", "6")' }
+                    ]
+                }
+            ]
+        },
+        7: {
+            webType: "JUEJIN",
+            pc: [
+                {
+                    title: "顶部",
+                    children: [
+                        { type: "checked", label: "顶部操作", for: "JuejinTop", checked: false, getEvent: 'JuejinTop' }
+                    ]
+                }
+            ]
+        },
+
     }
     let asideWidth = '0px'
 
@@ -223,6 +279,8 @@
             // { platform: 'CSDN', reg: /.*blog.csdn.net\.*/, title: 'CSDN文章类型推荐优化', key: 3.1 },
             { platform: 'CSDN', reg: /.*so.csdn.net\/.*/, title: 'CSDN搜索页面', key: 4 },
             { platform: 'Juejin', reg: /juejin.cn\/post\/.*/, title: '掘金文章详情', key: 5 },
+            { platform: 'Juejin', reg: /juejin.cn\/search\?.*/, title: '掘金搜索页面', key: 7 },
+            { platform: 'Juejin', reg: /juejin.cn/, title: '掘金首页', key: 6 },
         ]
 
         for (let i = 0; i < urlResList.length; i++) {
@@ -260,6 +318,14 @@
                     }, 500)
                 }
             }, 100)
+        } else if(/https:\/\/link\.juejin\.cn\/.*/.test(url)) {
+            target_url = url.split("target=")[1]
+             setTimeout(()=>{getElement('.content .title')[0].innerText = 'Blog-UI 正在跳转到: '})
+            initDialog('body',"Blog-UI 正在跳转")
+            target_url = decodeURIComponent(target_url) // 编码
+            setTimeout(() => {
+                window.location.href = target_url;
+            }, 500)
         }
     }
 
@@ -270,7 +336,7 @@
 
     // 设置缓存更改 配置文件
     function generalCetch() {
-        let parentConfig = CSDNCONFIG[CURRENTPAGES][ISH5 ? 'h5' : 'pc']
+        let parentConfig = BLOGUICONFIG[CURRENTPAGES][ISH5 ? 'h5' : 'pc']
         if (parentConfig.length !== 0) {
             // 设置缓存中的内容 并更新 源配置文件
             parentConfig.forEach((item) => {
@@ -286,7 +352,7 @@
                     }
                 })
             })
-            addMain(CSDNCONFIG[CURRENTPAGES][ISH5 ? 'h5' : 'pc'], 'CSDN')  // 生成虚拟节点
+            addMain(parentConfig, BLOGUICONFIG[CURRENTPAGES].webType)  // 生成虚拟节点
         }
     }
 
@@ -350,11 +416,11 @@
     function csdnDirectory(checkedFlag, domId) {
         CSDNEvent(domId, checkedFlag)
         if (checkedFlag && domId) {
-            csdnSetMenuHeight()
+            csdnSetMenuHeight(flag = true)
         }
     }
 
-    function csdnSetMenuHeight() {
+    function csdnSetMenuHeight(flag = false) {
         setTimeout(() => {
             let asidedirectory = getElement('#asidedirectory')[0]
             if (asidedirectory) {
@@ -370,10 +436,10 @@
                 window.onscroll = (e) => {
                     csdnScrollMenu(asidedirectory, CSDNMenuHeight)
                 }
+
             }
         }, 1000)
     }
-
 
     function csdnScrollMenu(asidedirectory, CSDNMenuHeight) {
         let scrollTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop
@@ -402,10 +468,8 @@
                             if (GM_listValues().includes(target.id)) {
                                 GM_setValue(target.id, target.checked)
                             }
-
                             var event = target.getAttribute('event')
                             event != 'undefined' ? eval(`${event}(${target.checked}, '${target.attributes.domId.value}')`) : setDomEvent(target, type)
-
                         }
                     }
                 }
@@ -653,10 +717,12 @@
 
     // 设置点击事件 在这里需要进行分发
     function setDomEvent(e, type) {
+        console.log(type)
         let checkedFlag = e.checked
         let domId = e.attributes.domid.value
         switch (type) {
             case 'CSDN': CSDNEvent(domId, checkedFlag)
+            case 'JUEJIN': JUEJINEvent(domId, checkedFlag)
         }
     }
 
@@ -805,48 +871,6 @@
         })
     }
 
-    // ------- 掘金专区 ---------
-    function JuejinIsH5OrPC() {
-        return false
-    }
-
-    function JuejinOptimiz() {
-        // setTimeout(() => {
-        //     addCss('.main-container', {
-        //         "width": '90vw',
-        //         'max-width': '90vw'
-        //     })
-        // }, 500)
-        // 没有登陆的时候 顶部的处理
-        let noLoginDisplay = ['.creator-item', '.vip-entry']
-        let isLogin = getElement('.login-button')[0]
-        noLoginDisplay.forEach(item => {
-            getElement(item)[0].style.display = isLogin ? 'none' : 'block'
-        })
-
-        window.onscroll = (e) => {
-            let scrollTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop
-            // 如果卷曲高度 》 前面几个元素的和 那就设置目录的类名
-            // if(scrollTop == )
-        }
-
-
-    }
-
-    // 掘金顶部数据处理
-    function JuejinTop(checked) {
-        let topList = getElement('.phone-hide .nav-item')
-        topList.forEach((item, index) => {
-            if (index != 0) {
-                if (item.getAttribute('tag') == 'li') {
-                    item.style.display = checked ? 'flex' : 'none'
-                } else {
-                    item.style.display = checked ? 'block' : 'none'
-                }
-            }
-        })
-    }
-
     // ----------- CSDN 专区 ----------
 
     function CSDNIsH5OrPC(id) {
@@ -863,6 +887,7 @@
     function CSDNEvent(domId, checked) {
         displayDom(domId, checked);
         (!ISH5 && CURRENTPAGES == 2) ? setAside() : '' // 点击之后进行判断是不是没有右侧的侧边栏了
+        window.onscroll = null
         csdnSetMenuHeight()
     }
 
@@ -1084,6 +1109,95 @@
         }
     }
 
+    // ------- 掘金专区 ---------
+    function JUEJINEvent(domId, checked) {
+        // if(domId === 'sticky-block-box') {
+
+        // } else {
+        displayDom(domId, checked);
+        // }
+    }
+
+    function JuejinIsH5OrPC() {
+        return false
+    }
+
+    function JuejinOptimiz() {
+        // setTimeout(() => {
+        //     addCss('.main-container', {
+        //         "width": '90vw',
+        //         'max-width': '90vw'
+        //     })
+        // }, 500)
+        // setTimeout(()=>{
+        //     let hljdButton = getElement('.copy-code-btn')
+
+        //     if (hljdButton && hljdButton.length !== 0) {
+        //         hljdButton.forEach(item=>{
+        //             item.setAttribute('class', 'copy-code-button')
+        //         })
+        //     }
+        // }, 1000)
+
+        // let hljd = getElement('.copy-code-button')
+        // if (hljd && hljd.length !== 0) {
+        //     hljd.forEach(item=>{
+        //         item.addEventListener('click',(e)=>{
+        //             console.log(e)
+        //         })
+        //     })
+        //  }
+
+        document.oncopy = event => event.clipboardData.setData('text',window.getSelection(0).toString());
+
+        setTimeout(()=>{ getElement('.article-suspended-panel .tooltip .panel-btn')[0].click() }, 500)
+
+        // 没有登陆的时候 顶部的处理
+        let noLoginDisplay = ['.creator-item', '.vip-entry']
+        let isLogin = getElement('.login-button')[0]
+        noLoginDisplay.forEach(item => {
+            if(isLogin) {
+                getElement(item)[0].style.display = 'none'
+            } 
+        })
+    }
+
+    // 掘金顶部数据处理
+    function JuejinTop(checked) {
+        let topList = getElement('.phone-hide .nav-item')
+        topList.forEach((item, index) => {
+            if (index != 0) {
+                if (item.getAttribute('tag') == 'li') {
+                    item.style.display = checked ? 'flex' : 'none'
+                } else {
+                    item.style.display = checked ? 'block' : 'none'
+                }
+            }
+        })
+    }
+
+    // function JuejinImmersion(checked) {
+    //    setTimeout(()=>{ getElement('.article-suspended-panel .tooltip .panel-btn')[0].click() }, 500)
+    // }
+
+    // function juejinRadioC() {
+    //     GM_setValue('JuejinRadioC', true)
+    //     GM_setValue('JuejinRadioP', false)
+
+    //     getElement('main')[0].setAttribute('style', "width:60vw;")
+    //     getElement('.main-area')[0].setAttribute('style', "width: none")
+    // }
+
+    // function juejinRadioP() {
+    //     GM_setValue('JuejinRadioC', false)
+    //     GM_setValue('JuejinRadioP', true)
+
+    //     setTimeout(() => {
+    //         getElement('main')[0].setAttribute('style', "width: 80vw; max-width: inherit;")
+    //         getElement('.main-area')[0].setAttribute('style', "width: 80%")
+    //     },500)
+    // }
+
     // -------- 主函数 -------------
     function mainInit() {
         // 获取url地址 判断是那个网站
@@ -1100,7 +1214,7 @@
             case 'Juejin': ISH5 = JuejinIsH5OrPC(); break;
         }
 
-        if (CURRENTPAGES && !CSDNCONFIG[CURRENTPAGES][ISH5 ? 'h5' : 'pc']) {
+        if (CURRENTPAGES && !BLOGUICONFIG[CURRENTPAGES][ISH5 ? 'h5' : 'pc']) {
             log(`当前页面无优化，如果需要请联系作者`)
             return
         }
@@ -1110,7 +1224,7 @@
 
 
         // 进行刷新这之后的设置
-        CSDNCONFIG[CURRENTPAGES][ISH5 ? 'h5' : 'pc'].forEach(configItem => {
+        BLOGUICONFIG[CURRENTPAGES][ISH5 ? 'h5' : 'pc'].forEach(configItem => {
             configItem.children.forEach(item => {
 
                 // 如果有事件那就去单独执行 否则就是 默认隐藏

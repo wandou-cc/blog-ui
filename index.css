@@ -45,15 +45,15 @@ a:active {
     0% {
         transform: translateY(0px)
     }
-  
+
     30% {
         transform: translateY(-5px)
     }
-  
+
     50% {
         transform: translateY(0px)
     }
-  
+
     70% {
         transform: translateY(-5px)
     }
@@ -61,6 +61,7 @@ a:active {
     100% {
         transform: translateY(0px)
     }
+
     /* to {
         transform: translate(0)
     } */
@@ -72,7 +73,7 @@ a:active {
     width: 400px;
     top: -10px;
     left: -3px;
-    z-index:99;
+    z-index: 99;
     display: none;
     border-radius: 5px;
     box-shadow: 0 0 10px #ccc;
@@ -168,13 +169,14 @@ a:active {
     padding: 5px 10px;
     border-radius: 3px;
     color: #fff;
-    border: none 0 !important; 
+    border: none 0 !important;
     cursor: pointer;
 }
 
 .buttoncolor1 {
     background-image: linear-gradient(45deg, #13547a 0%, #80d0c7 100%);
 }
+
 .buttoncolor2 {
     background-image: linear-gradient(60deg, #96deda 0%, #50c9c3 100%);
 }
@@ -221,8 +223,8 @@ code {
     user-select: inherit !important;
 }
 
-.csdn-side-toolbar  {
-    left:inherit !important;
+.csdn-side-toolbar {
+    left: inherit !important;
     /* left: inherit; */
 }
 
@@ -294,14 +296,14 @@ code {
 
 .blog-ui-advertis img {
     width: 28px;
-    height:35px;
+    height: 35px;
     margin: 10px;
 }
 
-.blog-top-banner, 
-.blog-slide-ad-box, 
-.box-shadow, 
-#kp_box_www_swiper_ban, 
+.blog-top-banner,
+.blog-slide-ad-box,
+.box-shadow,
+#kp_box_www_swiper_ban,
 .blog-banner,
 .weixin-shadowbox,
 .feed-Sign-span,
@@ -309,7 +311,7 @@ code {
 .btn_open_app_prompt_div,
 .dis-none,
 div[id^='dmp_ad_'],
-div[id^='kp_box_']{
+div[id^='kp_box_'] {
     display: none !important;
 }
 
@@ -319,7 +321,7 @@ div[id^='kp_box_']{
 
 
 .observeToolbar {
-    position: relative !important; 
+    position: relative !important;
     z-index: 99 !important;
     bottom: 0px !important;
     width: 100% !important;
@@ -348,6 +350,24 @@ div[id^='kp_box_']{
 
 /* juejin */
 
-.guide-collect-popover , .vip-content, .app-download-sidebar-block {
+.guide-collect-popover,
+.vip-content,
+.app-download-sidebar-block,
+.login-guide-wrap .advertisement,
+.sticky-block,
+.juejin-ab-test-wrap,
+.login-popover,
+.vip-content {
     display: none !important;
 }
+
+/* .copy-code-button {
+    position: absolute;
+    top: 6px;
+    right: 15px;
+    font-size: 12px;
+    line-height: 1;
+    cursor: pointer;
+    color: hsla(0, 0%, 54.9%, .8);
+    transition: color .1s;
+} */
