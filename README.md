@@ -1,32 +1,36 @@
 
  <p align='center'>
-    <a title="Hits" target="_blank" href="https://github.com/wandou-cc/blog-ui">
+    <a  target="_blank" href="https://github.com/wandou-cc/blog-ui">
      <img src="https://cdn.jsdelivr.net/gh/wandou-cc/blog-ui@20220918_V1/icon/icon.png"/>
     </a>
   <br>
-  <a title="Hits" target="_blank" href="https://github.com/wandou-cc/blog-ui">
+  <a  target="_blank" href="https://github.com/wandou-cc/blog-ui">
+    <img alt="GitHub tag (latest by date)" src="https://img.shields.io/github/v/tag/wandou-cc/blog-ui">
+  </a>
+  <a  target="_blank" href="https://github.com/wandou-cc/blog-ui">
+      <img src="https://img.shields.io/github/stars/wandou-cc/blog-ui?style=flat-square"/>
+  </a>
+  <br >
+  <a  target="_blank" href="https://github.com/wandou-cc/blog-ui">
     <img src="https://hits.b3log.org/wandou-cc/blog-ui.svg">
   </a>
-  <a title="Hits" target="_blank" href="https://github.com/wandou-cc/blog-ui">
-    <img src="https://img.shields.io/github/stars/wandou-cc/blog-ui?style=flat-square"/>
-  </a>
-  <a title="Hits" target="_blank" href="https://github.com/wandou-cc/blog-ui">
+  <a  target="_blank" href="https://github.com/wandou-cc/blog-ui">
     <img src="https://img.shields.io/github/commit-activity/y/wandou-cc/blog-ui?style=flat-square"/>
   </a>
-  <a title="Hits" target="_blank" href="https://github.com/wandou-cc/blog-ui">
+  <a  target="_blank" href="https://github.com/wandou-cc/blog-ui">
      <img src="https://img.shields.io/github/last-commit/wandou-cc/blog-ui?style=flat-square"/>
   </a>
   <br>
-  <a title="Hits" target="_blank" href="https://github.com/wandou-cc/blog-ui/issues">
+  <a  target="_blank" href="https://github.com/wandou-cc/blog-ui/issues">
     <img src="https://img.shields.io/github/issues/wandou-cc/blog-ui?style=flat-square"/>
   </a>
-  <a title="Hits" target="_blank" href="https://github.com/wandou-cc/blog-ui/issues?q=is%3Aissue+is%3Aclosed">
+  <a  target="_blank" href="https://github.com/wandou-cc/blog-ui/issues?q=is%3Aissue+is%3Aclosed">
       <img src="https://img.shields.io/github/issues-closed/wandou-cc/blog-ui?style=flat-square"/>
   </a>
-  <a title="Hits" target="_blank" href="https://github.com/wandou-cc/blog-ui/pulls">
+  <a  target="_blank" href="https://github.com/wandou-cc/blog-ui/pulls">
       <img src="https://img.shields.io/github/issues-pr/wandou-cc/blog-ui?style=flat-square"/>
   </a>
-  <a title="Hits" target="_blank" href="https://github.com/wandou-cc/blog-ui">
+  <a  target="_blank" href="https://github.com/wandou-cc/blog-ui">
     <img src="https://img.shields.io/github/watchers/wandou-cc/blog-ui?style=flat-square"/>
   </a>
 </p>
@@ -44,14 +48,21 @@
 ## 兼容问题
   测试了主流常用浏览器 `chrome` `edge` `360` `FireFox` `X浏览器` 都没问题
 
+  入口位置 移动端PC端同步也不区分平台
+
 ## 版本更新
+
+### 1.2.8
+|序号      | 功能 |
+| ----------- | ----------- |
+| 1      |  修复移动端不能移动的bug    |
+| 2      |  增加思否处理  |
 
 ### 1.2.7
 |序号      | 功能 |
 | ----------- | ----------- |
 | 1      |  优化性能    |
 | 2      |  增加掘金处理  |
-
 
 掘金网站 由于vue框架写的 路由变化 导致我获取不到地址 所以在跳转到首页以及搜索页面的时候 需要刷新一下才能生效（想办法解决中）
 

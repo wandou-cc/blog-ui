@@ -1,9 +1,13 @@
-a:link,
+/* a:link,
 a:visited,
 a:hover,
 a:active {
     color: #4f4f4f;
     text-decoration: none;
+} */
+
+body {
+    touch-action: none !important; 
 }
 
 #blogUiApp {
@@ -91,6 +95,11 @@ a:active {
 
 .blog-main-title a {
     font-weight: 700;
+}
+
+.blog-ui-urltitle {
+    font-size: 14px;
+    margin: 5px;
 }
 
 .blog-ui-foot {
@@ -348,6 +357,14 @@ div[id^='kp_box_'] {
     display: block;
 }
 
+
+.touch-action {
+    touch-action: none;
+}
+.touch-action-auto {
+    touch-action: auto;
+}
+
 /* juejin */
 
 .guide-collect-popover,
@@ -357,9 +374,13 @@ div[id^='kp_box_'] {
 .sticky-block,
 .juejin-ab-test-wrap,
 .login-popover,
+.open-button,
 .vip-content {
     display: none !important;
 }
+
+
+
 
 /* .copy-code-button {
     position: absolute;
@@ -371,3 +392,10 @@ div[id^='kp_box_'] {
     color: hsla(0, 0%, 54.9%, .8);
     transition: color .1s;
 } */
+
+/* sifou */
+.modal-dialog {
+    display: none !important;
+}
+
+
