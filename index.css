@@ -398,4 +398,12 @@ div[id^='kp_box_'] {
     display: none !important;
 }
 
+.ad-container {
+    display: none !important;
+}
+
+.recommend-box {
+    display: none !important;
+}
+
 
