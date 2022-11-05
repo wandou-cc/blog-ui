@@ -20,7 +20,7 @@
 // @grant        GM_deleteValue
 // @grant        GM_listValues
 // @license      MIT License
-// @note         1.2.8 添加掘金
+// @note         1.2.9 处理知乎
 // @noframes
 
 // ==/UserScript==
