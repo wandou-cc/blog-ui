@@ -1,12 +1,12 @@
 // ==UserScript==
-// @name         ⚡️ 掘金 ｜csdn ｜ 思否 独家UI排版 更方便您的阅读📖 去广告🪧 免登录复制 一键复制 去剪贴板劫持 持续更新 外链跳转 宽屏展示 不定期帮忙下载资源
+// @name         ⚡️ 掘金 ｜csdn ｜知乎 ｜ 独家UI排版 更方便您的阅读📖 去广告🪧 免登录复制 一键复制 去剪贴板劫持 持续更新 外链跳转 宽屏展示 不定期帮忙下载资源
 // @namespace    https://github.com/wandou-cc/blog-ui
-// @version      1.2.8
-// @description  ⚡️ 掘金 ｜csdn ｜ 思否  独家UI排版 更方便您的阅读📖 去广告🪧 免登录复制 一键复制 劫持剪贴板 持续更新 ｜💫全新布局｜🫥去掉一些花里胡哨的组件，阅读更加清晰｜🐯基本实现显示部分由用户自己定制｜🌈直接一键复制 不在需要登录｜✨展开所有折叠代码，简化操作｜支持移动端PC端通通优化｜入口支持拖拽放置
+// @version      1.2.9
+// @description  ⚡️ 掘金 ｜csdn ｜ 知乎 独家UI排版 更方便您的阅读📖 去广告🪧 免登录复制 一键复制 劫持剪贴板 持续更新 ｜💫全新布局｜🫥去掉一些花里胡哨的组件，阅读更加清晰｜🐯基本实现显示部分由用户自己定制｜🌈直接一键复制 不在需要登录｜✨展开所有折叠代码，简化操作｜支持移动端PC端通通优化｜入口支持拖拽放置
 // @author       wandou-cc
 // @include      *://*.csdn.net/*
 // @include      *://*juejin.cn/*
-// @include      *://*segmentfault.com/*
+// @include      *://*zhihu.com/*
 
 // @resource css https://cdn.jsdelivr.net/gh/wandou-cc/blog-ui@20221017_V1/index.css
 // @require      https://unpkg.com/better-scroll@latest/dist/better-scroll.min.js
@@ -159,6 +159,7 @@
                         { type: "checked", domId: ".main-rt .so-questionnaire-body", for: "Csdnquestionnaire", label: "推荐CSDN", checked: false },
                         { type: "checked", domId: ".main-rt .so-hot-words", for: "Csdnhot-words", label: "相关搜索", checked: false },
                         { type: "checked", domId: ".main-rt .wrap-hot", for: "Csdnwrap-hot", label: "猜你想搜", checked: false },
+                        { type: "checked", domId: ".main-rt .related-list", for: "related-list", label: "热搜榜", checked: false },
                         { type: "checked", domId: ".main-rt .so-items-taglist", for: "Csdntaglist", label: "相关标签", checked: false }
                     ]
                 },
@@ -278,7 +279,7 @@
                     title: "文章底部",
                     children: [
                         { type: "checked", domId: "#answer-question", for: "SiFouQuestion", label: "撰写回答", checked: true },
-                        { type: "checked", domId: "", for: "SiFouMt4", label: "相似问题", checked: true, getEvent: 'similarPro'}
+                        { type: "checked", domId: "", for: "SiFouMt4", label: "相似问题", checked: true, getEvent: 'similarPro' }
                     ]
                 }, {
                     title: "顶部导航",
@@ -308,7 +309,7 @@
                     title: "文章底部",
                     children: [
                         { type: "checked", domId: "#comment-area", for: "SiFouComment", label: "评论", checked: true },
-                        { type: "checked", domId: "", for: "SiFouRead", label: "继续阅读", checked: false, getEvent: 'similarRead'}
+                        { type: "checked", domId: "", for: "SiFouRead", label: "继续阅读", checked: false, getEvent: 'similarRead' }
                     ]
                 }, {
                     title: "顶部导航",
@@ -359,14 +360,7 @@
         let target_url = ''
         let flag = false
 
-        if (url.match(/jianshu.com\/go-wild/)) {
-            flag = true
-            target_url = url.split("url=")[1]
-        } else if (url.match(/c\.pc\.qq\.com\/.*?\.html\?pfurl=/)) {
-            flag = true
-            target_url = url.split("pfurl=")[1]
-            target_url = target_url.split("&pfuin=")[0]
-        } else if (/https:\/\/link\.csdn\.net\/.*/.test(url)) {
+        if (/https:\/\/link\.csdn\.net\/.*/.test(url)) {
             flag = true
             target_url = url.split("target=")[1]
             setTimeout(() => {
@@ -380,11 +374,11 @@
                     }, 500)
                 }
             }, 500)
-
-        } else if(/https:\/\/link\.juejin\.cn\/.*/.test(url)) {
+        } 
+        if (/https:\/\/link\.juejin\.cn\/.*/.test(url) || /https:\/\/link\.zhihu\.com\/.*/.test(url)) {
             target_url = url.split("target=")[1]
-             setTimeout(()=>{getElement('.content .title')[0].innerText = 'Blog-UI 正在跳转到: '})
-            initDialog('body',"Blog-UI 正在跳转")
+            // setTimeout(() => { getElement('.content .title')[0].innerText = 'Blog-UI 正在跳转到: ' })
+            initDialog('body', "Blog-UI 正在跳转")
             target_url = decodeURIComponent(target_url) // 编码
             setTimeout(() => {
                 window.location.href = target_url;
@@ -790,25 +784,6 @@
         }
     }
 
-    // 初始化滚动条
-    function initScrool() {
-        // setTimeout(() => {
-        let wrapper = getElement('.blog-ui-setting')[0]
-        BetterScroll.createBScroll(wrapper, {
-            probeType: 3,
-            pullUpLoad: true,
-            mouseWheel: true,
-            scrollY: true,
-            scrollX: false,
-            scrollbar: {
-                fade: true,
-                interactive: true,
-                scrollbarTrackClickable: true
-            }
-        })
-        // }, 1000)
-    }
-
     // 添加外部样式
     function addCss(className, query) {
         let dom = getElement(className)[0]
@@ -828,6 +803,10 @@
                     </a>
                 </p>
                 <p class='blog-ui-version'> 当前版本号: ${VERSION}</p>
+                <div style="text-align:center">
+                    <p> 作者本人也是做前端开发的 </p> 
+                    <p> 有兴趣的小伙伴可以加百人大群 一起探讨交流 </p>
+                </div>
                 <a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=KBoDLbs7o7cLxBwKbBij0RNdNPslJ-HS&jump_from=webapi&authKey=zBON7pCcMJkpGoufA4QHOBHFNVYrJ6exGexad89wzgTpSLozInSnoGgQSEGhgMEp">
                     <p class='blog-ui-addQQ'> 
                        
@@ -887,7 +866,6 @@
                 getElement('.bscroll-vertical-scrollbar')[0].remove()
             }
             getElement('.blog-ui-csdn')[0].style.transform = 'translateX(0px) translateY(0px) translateZ(1px)'
-            initScrool()
         })
 
         addEvent('#blog-main', 'mouseleave', () => {
@@ -903,12 +881,11 @@
             father.style.top = GM_getValue('y')
             father.style.left = GM_getValue('x')
         }
-        
+
         addEvent('#blog-ui-main', 'mousedown', (e) => {
             var x = e.pageX - father.offsetLeft
             var y = e.pageY - father.offsetTop
             function move(e) {
-                console.log(e)
                 let Py = e.pageY - y
                 let Px = e.pageX - x
                 father.style.top = Py + 'px'
@@ -1237,17 +1214,17 @@
         //     })
         //  }
 
-        document.oncopy = event => event.clipboardData.setData('text',window.getSelection(0).toString());
+        document.oncopy = event => event.clipboardData.setData('text', window.getSelection(0).toString());
 
-        setTimeout(()=>{ getElement('.article-suspended-panel .tooltip .panel-btn')[0].click() }, 500)
+        setTimeout(() => { getElement('.article-suspended-panel .tooltip .panel-btn')[0].click() }, 500)
 
         // 没有登陆的时候 顶部的处理
         let noLoginDisplay = ['.creator-item', '.vip-entry']
         let isLogin = getElement('.login-button')[0]
         noLoginDisplay.forEach(item => {
-            if(isLogin) {
+            if (isLogin) {
                 getElement(item)[0].style.display = 'none'
-            } 
+            }
         })
     }
 
@@ -1274,7 +1251,7 @@
     function removeSifouTopbar(checked) {
         getElement('.navbar-nav')[0].style.display = checked ? 'flex' : 'none'
     }
-    
+
     function SiFouRadioC() {
         GM_setValue('SiFouRadioC', true)
         GM_setValue('SiFouRadioP', false)
@@ -1290,15 +1267,15 @@
     }
 
     function similarRead(checked) {
-        setTimeout(()=>{
+        setTimeout(() => {
             getElement('#comment-area')[0].parentElement.nextElementSibling.style.display = checked ? 'block' : 'none'
             // console.log(getElement('#comment-area'))
         }, 500)
     }
 
     function similarPro(checked) {
-        setTimeout(()=>{
-            getElement('#answer-question')[0].nextElementSibling.style.display = checked ? 'block': 'none'
+        setTimeout(() => {
+            getElement('#answer-question')[0].nextElementSibling.style.display = checked ? 'block' : 'none'
         }, 500)
     }
 
@@ -1339,7 +1316,7 @@
                         eval(`${item.getEvent}(${item.checked}, '${item.domId}')`)
                     }
                 } else {
-                    setTimeout(()=>{
+                    setTimeout(() => {
                         displayDom(item.domId, item.checked)
                     }, 500)
                 }

@@ -138,19 +138,41 @@ body {
 }
 
 .blog-ui-setting {
-    /* border-top: 1px solid #ccc; */
     padding-top: 10px;
     height: calc(60vh - 80px);
-
+    overflow-y: auto;
     position: relative;
-    overflow: hidden;
     white-space: nowrap
 }
+
+
+.blog-ui-setting::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+.blog-ui-setting::-webkit-scrollbar-button {
+    display: none;
+}
+
+.blog-ui-setting::-webkit-scrollbar-thumb {
+    background: rgba(144, 147, 153, 0.3);
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.blog-ui-setting::-webkit-scrollbar-corner {
+    display: none;
+}
+
+.blog-ui-setting::-webkit-resizer {
+    display: none;
+}
+
 
 .blog-ui-config-title {
     padding: 5px;
     font-weight: 800;
-    /* border-bottom: 1px solid #ccc; */
 }
 
 .blog-ui-item-title {
@@ -231,7 +253,9 @@ code {
     -ms-user-select: inherit !important;
     user-select: inherit !important;
 }
-
+.csdn-common-logo-advert {
+    display: none !important;
+}
 .csdn-side-toolbar {
     left: inherit !important;
     /* left: inherit; */
@@ -370,7 +394,8 @@ div[id^='kp_box_'] {
 .guide-collect-popover,
 .vip-content,
 .app-download-sidebar-block,
-.login-guide-wrap .advertisement,
+.login-guide-wrap,
+.advertisement,
 .sticky-block,
 .juejin-ab-test-wrap,
 .login-popover,
@@ -378,32 +403,4 @@ div[id^='kp_box_'] {
 .vip-content {
     display: none !important;
 }
-
-
-
-
-/* .copy-code-button {
-    position: absolute;
-    top: 6px;
-    right: 15px;
-    font-size: 12px;
-    line-height: 1;
-    cursor: pointer;
-    color: hsla(0, 0%, 54.9%, .8);
-    transition: color .1s;
-} */
-
-/* sifou */
-.modal-dialog {
-    display: none !important;
-}
-
-.ad-container {
-    display: none !important;
-}
-
-.recommend-box {
-    display: none !important;
-}
-
 
