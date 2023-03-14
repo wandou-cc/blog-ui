@@ -635,7 +635,7 @@
         GM_setValue('CsdnRadioP', false)
         GM_setValue('CsdnRadioC', true)
 
-        getElement('.main_father')[0].style = `height: 100%; width: 99vw; justify-content: center;`
+        getElement('.main_father')[0].style = `height: 100%; width: 97vw; justify-content: center;`
         getElement('.container')[0].style = `display: flex;width:70vw;`
     }
 
