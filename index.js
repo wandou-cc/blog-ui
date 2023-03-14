@@ -163,7 +163,7 @@
                         { type: "checked", domId: ".main-rt .so-items-taglist", for: "Csdntaglist", label: "相关标签", checked: false }
                     ]
                 },
-                {
+                { 
                     title: "其他",
                     children: [
                         { type: "checked", domId: "", for: "CsdnSoNav", label: "平铺显示(请勿与其他同用)", getEvent: 'soPc' }
