@@ -181,13 +181,13 @@
             webType: "JUEJIN",
             pc: [
 
-                {
-                    title: "查看模式",
-                    children: [
-                        { type: "radio", for: "JuejinRadioC", label: "放大显示", checked: true, getEvent: 'juejinRadioC' },
-                        { type: "radio", for: "JuejinRadioP", label: "居中显示", checked: false, getEvent: 'juejinRadioP' },
-                    ]
-                },
+                // {
+                //     title: "查看模式",
+                //     children: [
+                //         { type: "radio", for: "JuejinRadioC", label: "放大显示", checked: true, getEvent: 'juejinRadioC' },
+                //         { type: "radio", for: "JuejinRadioP", label: "居中显示", checked: false, getEvent: 'juejinRadioP' },
+                //     ]
+                // },
                 {
                     title: "顶部",
                     children: [
@@ -636,7 +636,7 @@
         GM_setValue('CsdnRadioC', true)
 
         getElement('.main_father')[0].style = `height: 100%; width: 97vw; justify-content: center;`
-        getElement('.container')[0].style = `display: flex;width:70vw;`
+        getElement('.container')[0].style = `display: flex;`
     }
 
     // 初始化当前页面配置
@@ -1284,7 +1284,7 @@
 
         document.oncopy = event => event.clipboardData.setData('text', window.getSelection(0).toString());
 
-        // setTimeout(() => { getElement('.article-suspended-panel .tooltip .panel-btn')[0].remove() }, 500)
+        setTimeout(() => { getElement('.article-suspended-panel .tooltip .panel-btn')[0].remove() }, 500)
 
         // 没有登陆的时候 顶部的处理
         let noLoginDisplay = ['.creator-item', '.vip-entry']
