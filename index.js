@@ -20,7 +20,7 @@
 // @grant        GM_deleteValue
 // @grant        GM_listValues
 // @license      MIT License
-// @note         1.3.0 优化
+// @note         1.3.2 增加在线人数统计
 // @noframes
 
 // ==/UserScript==
@@ -163,7 +163,7 @@
                         { type: "checked", domId: ".main-rt .so-items-taglist", for: "Csdntaglist", label: "相关标签", checked: false }
                     ]
                 },
-                { 
+                {
                     title: "其他",
                     children: [
                         { type: "checked", domId: "", for: "CsdnSoNav", label: "平铺显示(请勿与其他同用)", getEvent: 'soPc' }
@@ -1196,9 +1196,9 @@
         GM_setValue('JuejinRadioP', false)
         setTimeout(() => {
             let dom = getElement('.main-container')[0]
-            dom.setAttribute('style', `max-width: ${1300}px`)
+            dom.setAttribute('style', `max-width: ${1200}px`)
             let main = getElement('.main-area')[0]
-            main.style.width = '980px'
+            main.style.width = '890px'
         }, 100)
     }
 
@@ -1351,15 +1351,17 @@
     }
 
     function getOnileUser() {
-        let parentDom = getElement('.blog-ui-csdn-main')[0]
-        let script1 = document.createElement('script')
-        let script2 = document.createElement('script')
-        script1.setAttribute('id', '_wauwd4')
-        script1.innerHTML = 'var _wau = _wau || []; _wau.push(["dynamic", "g24ioigmiv", "wd4", "c4302bffffff", "small"]);'
-        parentDom.appendChild(script1)
-        script2.setAttribute('async', true)
-        script2.setAttribute('src', '//waust.at/d.js')
-        parentDom.appendChild(script2)
+        setTimeout(() => {
+            let parentDom = getElement('.blog-ui-csdn-main')[0]
+            let script1 = document.createElement('script')
+            let script2 = document.createElement('script')
+            script1.setAttribute('id', '_wauwd4')
+            script1.innerHTML = 'var _wau = _wau || []; _wau.push(["dynamic", "g24ioigmiv", "wd4", "c4302bffffff", "small"]);'
+            script2.setAttribute('async', true)
+            script2.setAttribute('src', '//waust.at/d.js')
+            parentDom.appendChild(script1)
+            parentDom.appendChild(script2)
+        }, 2000)
     }
 
     // -------- 主函数 -------------
