@@ -419,3 +419,9 @@ div[id^='kp_box_'] {
 .waubutton p {
     font-size: 14px !important;
 }
+
+
+.zhihuCreateTime {
+    margin: 20px;
+    color: #ccc;
+}

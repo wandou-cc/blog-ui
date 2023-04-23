@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         ⚡️ 掘金 ｜csdn ｜知乎 ｜ 独家UI排版 更方便您的阅读📖 去广告🪧 免登录复制 一键复制 去剪贴板劫持 持续更新 外链跳转 宽屏展示 不定期帮忙下载资源
 // @namespace    https://github.com/wandou-cc/blog-ui
-// @version      1.3.2
+// @version      1.3.3
 // @description  ⚡️ 掘金 ｜csdn ｜ 知乎 独家UI排版 更方便您的阅读📖 去广告🪧 免登录复制 一键复制 劫持剪贴板 持续更新 ｜💫全新布局｜🫥去掉一些花里胡哨的组件，阅读更加清晰｜🐯基本实现显示部分由用户自己定制｜🌈直接一键复制 不在需要登录｜✨展开所有折叠代码，简化操作｜支持移动端PC端通通优化｜入口支持拖拽放置
 // @author       wandou-cc
 // @include      *://*.csdn.net/*
@@ -27,7 +27,7 @@
 
 (function () {
     GM_addStyle(GM_getResourceText("css"));
-    const VERSION = '1.3.2'
+    const VERSION = '1.3.3'
     const TITLE = 'BLOGUI'
 
     let ISH5 = null
@@ -327,7 +327,56 @@
                 }
             ]
         },
-
+        10: {
+            webType: "ZhiHu",
+            pc: [
+                // {
+                //     title: "查看模式",
+                //     children: [
+                //         { type: "radio", for: "ZhiHuC", label: "居中显示", checked: true, getEvent: 'ZhiHuRadioC' },
+                //         { type: "radio", for: "ZhiHuP", label: "铺平展示", checked: false, getEvent: 'ZhiHuRadioP' },
+                //     ]
+                // },
+                {
+                    title: "右侧",
+                    children: [
+                        { type: "checked", domId: ".css-oyqdpg", for: "ZhihuSimilarQuestions", label: "相关问题", checked: false },
+                        { type: "checked", domId: "div[data-za-detail-view-path-module_name='相关推荐']", for: "ZhihuRecommend", label: "相关推荐", checked: false },
+                        { type: "checked", domId: "Footer", for: "ZhihuQFooter", label: "版权其他", checked: false }
+                    ]
+                }
+            ]
+        },
+        11: {
+            webType: "ZhiHu",
+            pc: [
+                {
+                    title: "查看模式",
+                    children: [
+                        { type: "radio", for: "ZhiHuC", label: "居中显示", checked: true, getEvent: 'ZhiHuRadioC' },
+                        { type: "radio", for: "ZhiHuP", label: "铺平展示", checked: false, getEvent: 'ZhiHuRadioP' },
+                    ]
+                },
+                {
+                    title: "底部",
+                    children: [
+                        { type: "checked", domId: "div[aria-label='推荐阅读']", for: "ZhihuRead", label: "推荐阅读", checked: false }
+                    ]
+                }
+            ]
+        },
+        12: {
+            webType: "ZhiHu",
+            pc: [
+                {
+                    title: "右侧",
+                    children: [
+                        { type: "checked", domId: "div[aria-label='搜索发现']", for: "ZhihuSearch", label: "搜索发现", checked: false },
+                        { type: "checked", domId: "Footer", for: "ZhihuSQFooter", label: "版权其他", checked: false }
+                    ]
+                }
+            ]
+        },
     }
     let asideWidth = '0px'
 
@@ -345,7 +394,10 @@
             { platform: 'Juejin', reg: /juejin.cn\/search\?.*/, title: '掘金搜索页面', key: 7 },
             { platform: 'Juejin', reg: /juejin.cn/, title: '掘金首页', key: 6 },
             { platform: 'SiFou', reg: /segmentfault.com\/q\/.*/, title: '思否问答详情', key: 8 },
-            { platform: 'SiFou', reg: /segmentfault.com\/a.*/, title: '思否文章详情', key: 9 }
+            { platform: 'SiFou', reg: /segmentfault.com\/a.*/, title: '思否文章详情', key: 9 },
+            { platform: 'ZhiHu', reg: /zhihu.com\/question\/.*/, title: '知乎问答', key: 10 },
+            { platform: 'ZhiHu', reg: /zhuanlan.zhihu.com\/p\/.*/, title: '知乎专栏', key: 11 },
+            { platform: 'ZhiHu', reg: /.*zhihu.com\/search\.*/, title: '知乎搜索', key: 12 },
         ]
 
         for (let i = 0; i < urlResList.length; i++) {
@@ -473,43 +525,6 @@
     }
 
 
-    function csdnDirectory(checkedFlag, domId) {
-        CSDNEvent(domId, checkedFlag)
-        if (checkedFlag && domId) {
-            csdnSetMenuHeight(flag = true)
-        }
-    }
-
-    function csdnSetMenuHeight(flag = false) {
-        setTimeout(() => {
-            let asidedirectory = getElement('#asidedirectory')[0]
-            if (asidedirectory) {
-                let blog_container_aside = Array.from(getElement('.blog_container_aside')[0].children)
-                let height = 0
-                blog_container_aside.forEach((item) => {
-                    height += item.offsetHeight
-                })
-                height = height - asidedirectory.offsetHeight
-                GM_setValue('CSDNMenuHeight', height)
-                let CSDNMenuHeight = GM_getValue("CSDNMenuHeight")
-                csdnScrollMenu(asidedirectory, CSDNMenuHeight)
-                window.onscroll = (e) => {
-                    csdnScrollMenu(asidedirectory, CSDNMenuHeight)
-                }
-
-            }
-        }, 1000)
-    }
-
-    function csdnScrollMenu(asidedirectory, CSDNMenuHeight) {
-        let scrollTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop
-        if (scrollTop > CSDNMenuHeight) {
-            asidedirectory.classList.add('default-menu')
-        } else {
-            asidedirectory.classList.remove('default-menu')
-        }
-    }
-
     // 生成多选框
     function checkBox(item, type) {
         let checkObj = {
@@ -621,22 +636,6 @@
             ]
         }
         return radioVdom
-    }
-
-    function csdnRadioP() {
-        GM_setValue('CsdnRadioC', false)
-        GM_setValue('CsdnRadioP', true)
-
-        getElement('.main_father')[0].style = `height: 100%; width: 97vw; justify-content: unset;`
-        getElement('.container')[0].style = `display: flex;width: 97vw;`
-    }
-
-    function csdnRadioC() {
-        GM_setValue('CsdnRadioP', false)
-        GM_setValue('CsdnRadioC', true)
-
-        getElement('.main_father')[0].style = `height: 100%; width: 97vw; justify-content: center;`
-        getElement('.container')[0].style = `display: flex;`
     }
 
     // 初始化当前页面配置
@@ -784,6 +783,7 @@
             case 'CSDN': CSDNEvent(domId, checkedFlag)
             case 'JUEJIN': JUEJINEvent(domId, checkedFlag)
             case 'SiFou': SiFouEvent(domId, checkedFlag)
+            case 'ZhiHu': ZhiHuEvent(domId, checkedFlag)
         }
     }
 
@@ -949,6 +949,59 @@
     }
 
     // ----------- CSDN 专区 ----------
+    function csdnDirectory(checkedFlag, domId) {
+        CSDNEvent(domId, checkedFlag)
+        if (checkedFlag && domId) {
+            csdnSetMenuHeight(flag = true)
+        }
+    }
+
+    function csdnSetMenuHeight(flag = false) {
+        setTimeout(() => {
+            let asidedirectory = getElement('#asidedirectory')[0]
+            if (asidedirectory) {
+                let blog_container_aside = Array.from(getElement('.blog_container_aside')[0].children)
+                let height = 0
+                blog_container_aside.forEach((item) => {
+                    height += item.offsetHeight
+                })
+                height = height - asidedirectory.offsetHeight
+                GM_setValue('CSDNMenuHeight', height)
+                let CSDNMenuHeight = GM_getValue("CSDNMenuHeight")
+                csdnScrollMenu(asidedirectory, CSDNMenuHeight)
+                window.onscroll = (e) => {
+                    csdnScrollMenu(asidedirectory, CSDNMenuHeight)
+                }
+
+            }
+        }, 1000)
+    }
+
+    function csdnScrollMenu(asidedirectory, CSDNMenuHeight) {
+        let scrollTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop
+        if (scrollTop > CSDNMenuHeight) {
+            asidedirectory.classList.add('default-menu')
+        } else {
+            asidedirectory.classList.remove('default-menu')
+        }
+    }
+
+    function csdnRadioP() {
+        GM_setValue('CsdnRadioC', false)
+        GM_setValue('CsdnRadioP', true)
+
+        getElement('.main_father')[0].style = `height: 100%; width: 97vw; justify-content: unset;`
+        getElement('.container')[0].style = `display: flex;width: 97vw;`
+    }
+
+    function csdnRadioC() {
+        GM_setValue('CsdnRadioP', false)
+        GM_setValue('CsdnRadioC', true)
+
+        getElement('.main_father')[0].style = `height: 100%; width: 97vw; justify-content: center;`
+        getElement('.container')[0].style = `display: flex;`
+    }
+
 
     function CSDNIsH5OrPC(id) {
         // h5 移动端端时候的主元素ID
@@ -975,7 +1028,7 @@
             // 处理左侧
             getElement('.toolbar-menus li').forEach(item => {
                 let dataType = item.getAttribute('title')
-                if (['高价值源码课程分享', '简单高效优惠的云服务', '程序员的如意兵器', '找到志同道合的伙伴', '系统学习·问答·比赛', '开源代码托管'].includes(dataType)) {
+                if (['高价值源码课程分享', '简单高效优惠的云服务', '程序员的如意兵器', '找到志同道合的伙伴', '系统学习·问答·比赛', '开源代码托管', '让你的灵感的立即落地'].includes(dataType)) {
                     item.style.display = checked ? 'inline-block' : 'none'
                 }
             })
@@ -1055,6 +1108,7 @@
             getElement('.blog_container_aside .aside-box').forEach(item => {
                 domList.push(item.style.display)
             })
+
             if (domList.filter(item => {
                 return item == 'block'
             }).length == 0) {
@@ -1114,7 +1168,7 @@
 
     // 详情页面处理PC
     function csdnDeatilPc() {
-        setAside() // 判断右侧是否有悬浮
+        // (!ISH5 && CURRENTPAGES == 2) ? setAside() : '' // 点击之后进行判断是不是没有右侧的侧边栏了
 
         let mainDom = getElement('.main_father')[0]
         mainDom.classList.remove('justify-content-center')
@@ -1157,6 +1211,9 @@
             focusUP[0].remove()
             getElement('#article_content')[0].style.height = 'inherit'
         }
+        setTimeout(() => {
+            setAside() // 判断右侧是否有悬浮
+        }, 1000)
     }
 
     // ------处理搜索列表---------
@@ -1177,13 +1234,6 @@
             let mainDom = getElement('.clearfix')[0]
             checked ? mainDom.classList.remove('main') : mainDom.setAttribute('class', 'main clearfix')
         }, 100)
-    }
-
-    function diyIntercept() {
-        document.body.onmouseout = (e) => {
-            console.log(e.target.clientHeight)
-            console.log(e.target.clientWidth)
-        }
     }
 
     // ------- 掘金专区 ---------
@@ -1364,6 +1414,57 @@
         }, 2000)
     }
 
+
+    // 知乎专区
+    function ZhiHuEvent(domId, checked) {
+        displayDom(domId, checked);
+
+    }
+
+    function ZhihuOptimiz() {
+        setTimeout(() => {
+            let loginDom = getElement('.Modal-wrapper')
+            if (loginDom) {
+                let button = getElement('.Modal-closeButton')[0]
+                button.click()
+            }
+        }, 1000)
+        displayDom('.Banner-link', false)
+
+        setInterval(() => {
+            displayDom('.css-1ynzxqw', false)
+            displayDom('.css-1hwwfws', false)
+            displayDom('.Banner-link', false)
+        }, 3000)
+
+        displayDom('.AppBanner', false)
+
+        let dateCreate = document.createElement('div')
+        let parentDom = getElement('.QuestionHeader .QuestionHeader-main')[0]
+        // let time = document.getAttribute('itemprop', 'dateCreated')
+        let time = document.querySelector('meta[itemprop="dateCreated"]')
+        if(time) {
+            // debugger
+            let content = time.getAttribute('content')
+            let insertTime = new Date(content).toLocaleString()
+            dateCreate.innerHTML = '提问时间：' + insertTime.replaceAll('/', '-')
+            dateCreate.setAttribute('class', 'ContentItem-time')
+            parentDom.appendChild(dateCreate)
+        }
+
+    }
+
+    function ZhiHuRadioC() {
+        GM_setValue('ZhiHuC', true)
+        GM_setValue('ZhiHuP', false)
+        // setTimeout(() => {
+        //     let dom = getElement('.main-container')[0]
+        //     dom.setAttribute('style', `max-width: ${1200}px`)
+        //     let main = getElement('.main-area')[0]
+        //     main.style.width = '890px'
+        // }, 100)
+
+    }
     // -------- 主函数 -------------
     function mainInit() {
         // 获取url地址 判断是那个网站
@@ -1377,9 +1478,10 @@
         // 不同平台是不是H5
         switch (urlObject.platform) {
             case 'CSDN': ISH5 = CSDNIsH5OrPC('.csdn-toolbar'); break;
+            // case 'ZhiHu': ISH5 = ZhihuIsH5OrPC('')
             default: ISH5 = false
         }
-
+        log(CURRENTPAGES)
         if (CURRENTPAGES && !BLOGUICONFIG[CURRENTPAGES][ISH5 ? 'h5' : 'pc']) {
             log(`当前页面无优化，如果需要请联系作者`)
             return
@@ -1411,11 +1513,12 @@
         switch (urlObject.platform) {
             case 'CSDN': CSDNOoptimiz(urlObject.key); break;
             case 'Juejin': JuejinOptimiz(urlObject.key); break;
+            case 'ZhiHu': ZhihuOptimiz(urlObject.key); break;
         }
         // 生成附加信息
         appendDom()
         initMainEvent()
-        getOnileUser()
+        // getOnileUser()
 
         log(`当前正在优化 ${urlObject.title}  使用愉快！有问题请联系作者`)
 
