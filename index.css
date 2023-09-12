@@ -425,3 +425,7 @@ div[id^='kp_box_'] {
     margin: 20px;
     color: #ccc;
 }
+
+#remuneration {
+    display: none !important;
+}
